@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pass_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('is_visite')->default(false);
+            $table->boolean('is_active')->default(false);
             $table->integer('nb_visite')->nullable();
             $table->string('price')->nullable();
             $table->timestamps();

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('visites', function (Blueprint $table) {
-            $table->id();
+        Schema::create('immo_videos', function (Blueprint $table) {
+            $table->uuid('id')->primary()->unique()->index();
+            $table->longText('url');
+            $table->foreignUuid('place_id')->constrained('places')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visites');
+        Schema::dropIfExists('immo_videos');
     }
 };

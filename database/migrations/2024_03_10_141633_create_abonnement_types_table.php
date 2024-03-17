@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('price');
-            $table->string('type')->nullable();
-            $table->integer('tarif_stategique')->nullable();
+            $table->enum('type', ['personal', 'company']);
+            $table->boolean('is_active')->default(false);
             $table->integer('pourcentage_demarcheur')->nullable();
             $table->timestamps();
         });

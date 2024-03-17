@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('amount');
             $table->string('transaction_way');
             $table->string('transaction_type');
+            $table->id('promotion_id')->nullable();
+            $table->boolean('is_promotion')->default(false);
             $table->boolean('is_validated')->nullable()->default(false);
 
             $table->timestamps();

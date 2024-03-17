@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Ramsey\Uuid\Uuid;
 
 
-class Pass extends Model
+class ImmoVideo extends Model
 {
-    use HasFactory;
+    use HasFactory;    
     use HasUuids;
 
 

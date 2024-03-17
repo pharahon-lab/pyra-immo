@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             
-            $table->foreignId('county_id')->index()->nullable();
-            $table->foreign('county_id')->references('id')->on('countries');
+            $table->foreignId('country_id')->index()->nullable();
+            $table->foreign('country_id')->references('id')->on('countries');
 
             $table->timestamps();
         });
