@@ -1,3 +1,3 @@
 # Privacy Policy
 
-Edit this file to define the privacy policy for your application.
+Here you have the privacy policy of Pyra Immo plateform.
