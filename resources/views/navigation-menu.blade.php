@@ -9,13 +9,38 @@
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
+                
                 <!-- Navigation Links -->
+                <!-- Dashboard -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Catalogue') }}
                     </x-nav-link>
                 </div>
+
+                
+                <!-- Maisons -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('catalogue.places.index') }}" :active="request()->routeIs('catalogue.places.index')">
+                        {{ __('Maisons') }}
+                    </x-nav-link>
+                </div>
+
+                
+                <!-- Finances constrainded in team -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('catalogue.finances.index') }}" :active="request()->routeIs('catalogue.finances.index')">
+                        {{ __('Finances') }}
+                    </x-nav-link>
+                </div>
+                
+                <!-- Abonnements constrained in teams-->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('catalogue.abonnement.index') }}" :active="request()->routeIs('catalogue.abonnement.index')">
+                        {{ __('Abonnements') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
