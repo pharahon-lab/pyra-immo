@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AbonnementType;
 use Illuminate\Http\Request;
 
 class AbonnementController extends Controller
@@ -12,7 +13,8 @@ class AbonnementController extends Controller
 
     
     public function create(){
-        return view('catalogue.abonnement.create');
+        $ab_types = AbonnementType::all();
+        return view('catalogue.abonnement.create', ['abonnement_types' => $ab_types]);
     }
 
     

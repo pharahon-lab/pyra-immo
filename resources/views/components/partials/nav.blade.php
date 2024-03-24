@@ -42,15 +42,15 @@
         </button> --}}
 
         @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10 mx-2">
                     @auth
-                        <a href="{{ route('catalogue.dashboard') }}" class="font-semibold text-white hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Mon catalogue</a>
+                        <a href="{{ route('catalogue.dashboard') }}" class="mx-4 font-semibold text-white hover:text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Mon catalogue</a>
                     @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+                        <a href="{{ route('login') }}" class=" mx-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" 
-                            class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-2 px-4 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Register</a>
+                            class="mx-5 lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-2 px-4 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Register</a>
                         @endif
                     @endauth
                 </div>

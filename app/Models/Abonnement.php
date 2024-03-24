@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
 
 class Abonnement extends Model
@@ -34,4 +35,19 @@ class Abonnement extends Model
     {
         return ['id'];
     }
+
+    public function fascadeImmo(): BelongsTo
+    {
+        return $this->belongsTo(FascadeImmo::class);
+    }
+
+    public function abonnement_type(): BelongsTo
+    {
+        return $this->belongsTo(AbonnementType::class);
+    }
+    public function transaction(): BelongsTo
+    {
+        return $this->belongsTo(Transactions::class);
+    }
+
 }

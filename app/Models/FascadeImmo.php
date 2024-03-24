@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 
 class FascadeImmo extends Model
@@ -35,6 +36,12 @@ class FascadeImmo extends Model
     public function proprio(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    
+    public function abonnements(): HasMany
+    {
+        return $this->hasMany(Abonnement::class);
     }
 
 }

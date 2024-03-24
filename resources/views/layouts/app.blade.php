@@ -13,9 +13,16 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="{{asset('js/customer.js')}}" defer></script>
+        <script src="{{asset('js/customer-dropdown.js')}}" defer></script>
 
         <!-- Styles -->
         @livewireStyles
+        <style>
+            .gradient {
+              background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+            }
+          </style>
     </head>
     <body class="font-sans antialiased">
         <x-banner />

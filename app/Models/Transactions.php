@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Ramsey\Uuid\Uuid;
 
 class Transactions extends Model
@@ -33,6 +34,12 @@ class Transactions extends Model
     public function uniqueIds(): array
     {
         return ['id'];
+    }
+
+    
+    public function abonnements(): HasMany
+    {
+        return $this->hasMany(Abonnement::class);
     }
 }
 
