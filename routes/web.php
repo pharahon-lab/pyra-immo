@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbonnementController;
+use App\Http\Controllers\FascadeImmoController;
 use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlaceController;
@@ -37,6 +38,7 @@ Route::group(
         'prefix' => 'catalogue',
     ],
     function(){
+        Route::get('dashboard', [FascadeImmoController::class, 'dashboard'])->name('catalogue.dashboard');
         Route::group(['prefix' => 'places',], function(){
             Route::get('/', [PlaceController::class, 'index'])->name('catalogue.places.index');
             Route::get('create', [PlaceController::class, 'create'])->name('catalogue.places.create');
@@ -46,7 +48,7 @@ Route::group(
         Route::group(['prefix' => 'finances',], function(){
             Route::get('/', [FinanceController::class, 'index'])->name('catalogue.finances.index');
             Route::get('manage', [FinanceController::class, 'manage'])->name('catalogue.finances.manage');
-            Route::get('retrait', [FinanceController::class, 'retrait'])->name('catalogue.finances.index');
+            Route::get('retrait', [FinanceController::class, 'retrait'])->name('catalogue.finances.retrait');
             
 
         });

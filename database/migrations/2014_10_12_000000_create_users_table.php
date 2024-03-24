@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('is_suspended')->nullable()->default(false);
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
+            $table->foreignUuid('fascade_immo_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });

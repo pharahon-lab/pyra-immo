@@ -17,13 +17,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('logo')->nullable();
             $table->string('description');
-            $table->string('email')->unique();
+            $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone')->unique();
+            $table->string('phone')->nullable()->unique();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->double('balance')->default(0.0);
             $table->integer('views')->default(0);
+            $table->boolean('is_company')->default(false);
             
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
 

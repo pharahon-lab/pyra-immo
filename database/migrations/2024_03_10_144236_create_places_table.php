@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
 
-            $table->enum('offer', ['bureau', 'logement']);
+            $table->enum('offer', ['bureau', 'logement', 'terrain', 'commercial']);
             $table->enum('offer_type', ['sell', 'rent']);
             $table->enum('house_type', [
                 'studio',
@@ -59,8 +59,8 @@ return new class extends Migration
             $table->boolean('cours_arriere')->nullable()->default(false);
             $table->boolean('balcon_avant')->nullable()->default(false);
             $table->boolean('balcon_arriere')->nullable()->default(false);
-            $table->boolean('terrqsse_avant')->nullable()->default(false);
-            $table->boolean('terrqsse_arriere')->nullable()->default(false);
+            $table->boolean('terrasse_avant')->nullable()->default(false);
+            $table->boolean('terrasse_arriere')->nullable()->default(false);
 
             $table->boolean('is_validated')->nullable()->default(false);
             $table->boolean('is_occupe')->nullable()->default(false);
