@@ -27,6 +27,23 @@ class CountryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('country_code')
+                    ->required()
+                    ->maxLength(2),
+                Forms\Components\TextInput::make('lang')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('lang_code')
+                    ->required()
+                    ->maxLength(2),
+                Forms\Components\TextInput::make('phone_index')
+                    ->required()
+                    ->integer()
+                    ->maxLength(5),
+                Forms\Components\TextInput::make('phone_digit_number')
+                    ->required()
+                    ->integer()
+                    ->maxLength(255),
             ]);
     }
 
@@ -35,6 +52,12 @@ class CountryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('lang')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone_index')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone_digit_number')
                     ->searchable(),
                 TextColumn::make('cities_count')->counts('cities'),
                 Tables\Columns\TextColumn::make('created_at')

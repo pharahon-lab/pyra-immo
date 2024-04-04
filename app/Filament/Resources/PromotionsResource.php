@@ -4,6 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PromotionsResource\Pages;
 use App\Filament\Resources\PromotionsResource\RelationManagers;
+use App\Models\AbonnementType;
+use App\Models\Pass;
+use App\Models\PassType;
 use App\Models\Promotions;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -28,6 +31,8 @@ class PromotionsResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Toggle::make('use_code')
                     ->required(),
+                Forms\Components\Toggle::make('use_percentage')
+                    ->required(),
                 Forms\Components\DateTimePicker::make('start')
                     ->required(),
                 Forms\Components\DateTimePicker::make('end')
@@ -43,6 +48,16 @@ class PromotionsResource extends Resource
                 Forms\Components\TextInput::make('limit')
                     ->numeric()
                     ->default(null),
+                Forms\Components\TextInput::make('reduction')
+                    ->numeric()
+                    ->default(null),
+                Forms\Components\MorphToSelect::make('promotionnable')
+                ->types([
+                    Forms\Components\MorphToSelect\Type::make(PassType::class)
+                        ->titleAttribute('name'),
+                        Forms\Components\MorphToSelect\Type::make(AbonnementType::class)
+                        ->titleAttribute('title'),
+                ]),
             ]);
     }
 

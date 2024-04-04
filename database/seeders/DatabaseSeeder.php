@@ -183,6 +183,13 @@ class DatabaseSeeder extends Seeder
             fn (Sequence $sequence) => ['name' => $citci[$sequence->index]]
         )->forCountry([
             'name' => 'Côte d\'Ivoire',
+            'country_code' => 'CI',
+            'lang' => 'français',
+            'lang_code' => 'fr',
+            'currency' => 'Francs CFA',
+            'currency_code' => 'F CFA',
+            'phone_index' => 225,
+            'phone_digit_number' => 10,
         ])->create();
 
         
@@ -190,6 +197,13 @@ class DatabaseSeeder extends Seeder
             fn (Sequence $sequence) => ['name' => $citbf[$sequence->index]]
         )->forCountry([
             'name' => 'Burkina Faso',
+            'country_code' => 'BF',
+            'lang' => 'français',
+            'lang_code' => 'fr',
+            'currency' => 'Francs CFA',
+            'currency_code' => 'F CFA',
+            'phone_index' => 226,
+            'phone_digit_number' => 8,
         ])->create();
 
         Communes::factory()->count(13)->sequence(

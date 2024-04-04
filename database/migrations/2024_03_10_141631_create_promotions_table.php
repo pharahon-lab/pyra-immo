@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->string('promo_code');
             $table->boolean('use_code')->default(true);
+            $table->boolean('use_percentage')->default(true);
+            $table->integer('reduction')->default(0);
 
             $table->dateTime('start');
             $table->dateTime('end');
@@ -25,7 +27,7 @@ return new class extends Migration
             $table->smallInteger('usage_count')->default(0);
             $table->smallInteger('limit')->nullable();
 
-
+            $table->morphs('promotionnable');
 
             $table->timestamps();
         });
