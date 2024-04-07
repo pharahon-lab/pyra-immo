@@ -183,7 +183,7 @@ class DatabaseSeeder extends Seeder
             fn (Sequence $sequence) => ['name' => $citci[$sequence->index]]
         )->forCountry([
             'name' => 'Côte d\'Ivoire',
-            'country_code' => 'CI',
+            'country_code' => 'ci',
             'lang' => 'français',
             'lang_code' => 'fr',
             'currency' => 'Francs CFA',
@@ -197,7 +197,7 @@ class DatabaseSeeder extends Seeder
             fn (Sequence $sequence) => ['name' => $citbf[$sequence->index]]
         )->forCountry([
             'name' => 'Burkina Faso',
-            'country_code' => 'BF',
+            'country_code' => 'bf',
             'lang' => 'français',
             'lang_code' => 'fr',
             'currency' => 'Francs CFA',

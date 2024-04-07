@@ -67,9 +67,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white min-h-80 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="flex justify-between">
-                    <div>{{ $tt }}</div>
-                </div>
                 <div class="px-12">
                     <div class="flex justify-between w-4/6 px-2 mb-8 border-b-2 border-dashed">
                         <h4  class="mx-2 my-4 text-xl">Abonnement : </h4>

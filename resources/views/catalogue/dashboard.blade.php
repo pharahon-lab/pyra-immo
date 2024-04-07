@@ -38,7 +38,7 @@
                             {{ Auth::user()->fascadeImmo->name}}
                         </h1>
 
-                        <p class="m-2 text-sm font-medium text-orange">facade type</p>
+                        <p class="m-2 text-sm font-medium text-orange">{{ Auth::user()->fascadeImmo->type}}</p>
 
                     </div>
 

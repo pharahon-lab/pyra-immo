@@ -12,6 +12,9 @@
                     <h3 class="object-left-top m-3 p-2 font-semibold">Abonnement</h3>
                     <a class="object-right-top my-3 mx-5 py-2 px-4 text-white bg-orange-600  shadow-xl sm:rounded-lg" href="{{ route('catalogue.abonnement.create') }}">Nouvel abonnement</a>
                 </div>
+                <div class="m-6">
+                    <h3 class="text-orange-600 text-2xl font-bold flex justify-center">Pas d'abonnement en cours</h3>
+                </div>
             </div>
         </div>
     </div>
