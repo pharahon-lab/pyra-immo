@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid('id')->prinary()->unique()->index();
 
             $table->string('transaction_number');
-            $table->string('operation_id')->nullable();
-            $table->date('date_transaction')->nullable();
+            $table->string('operation_id');
+            $table->date('date_transaction');
             $table->string('amount');
             $table->string('transaction_way');
             $table->string('transaction_type');

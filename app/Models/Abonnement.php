@@ -43,7 +43,8 @@ class Abonnement extends Model
 
     public function abonnement_type(): BelongsTo
     {
-        return $this->belongsTo(AbonnementType::class);
+        // can use 'type_abonnement_id'
+        return $this->belongsTo(AbonnementType::class, 'type_abonnement_id');
     }
     public function transaction(): BelongsTo
     {

@@ -57,6 +57,7 @@ Route::group(
             Route::get('create', [AbonnementController::class, 'create'])->name('catalogue.abonnement.create');
             Route::get('edit', [AbonnementController::class, 'edit'])->name('catalogue.abonnement.edit');
             Route::get('resume/{ab_type}', [AbonnementController::class, 'resume'])->name('catalogue.abonnement.resume');
+            Route::post('payement/{ab_type}', [AbonnementController::class, 'buyAbonnement'])->name('catalogue.abonnement.payement');
             
 
         });

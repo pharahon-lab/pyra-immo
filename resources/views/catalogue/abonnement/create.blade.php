@@ -53,16 +53,16 @@
     <div class="py-12">
         <div class="max-w-9xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="flex justify-around mt-6">
+                <div class="flex justify-evenly mt-6">
                     <div>
-                        <button onclick="isCompany(false)"  id='particulier_label' class="w-70 rounded-lg px-6 my-2 mx-10 text-3xl leading-tight text-center text-white shadow-xl gradient ">
+                        <button onclick="isCompany(false)"  id='particulier_label' class="w-70 rounded-full px-6 my-2 mx-10 text-3xl leading-tight text-center text-white shadow-xl gradient ">
                             Prix Démarcheur
                         </button>
 
                     </div>
                     <div></div>
                     <div>
-                        <button onclick="isCompany(true)"  id='company_label' class="w-70 rounded-lg px-6 my-2 mx-10 text-3xl leading-tight text-center text-gray-800">
+                        <button onclick="isCompany(true)"  id='company_label' class="w-70 rounded-full px-6 my-2 mx-10 text-3xl leading-tight text-center text-gray-800">
                             Prix Agence
                         </button>
 

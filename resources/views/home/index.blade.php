@@ -1,5 +1,9 @@
 <x-customer-layout>
 
+  
+  @php
+    $commumes = App\Models\Communes::all();
+  @endphp
     
     <!--Hero-->
     <div class="pt-24">
@@ -14,16 +18,83 @@
               Parcourez nos annonces et trouvez votre bonheur!
             </p>
             <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-              Visiter les maisons
+              Visiter notre catalogue de propriétées
             </button>
           </div>
-          <!--Right Col-->
+          <!--Recherche-->
           <div class="w-full md:w-3/5 py-6 text-center">
-            <img class="w-full md:w-4/5 z-50" src="{{ asset('hero.png') }}" />
+
+            <form action="" method="post">
+              <div class="mx-auto flex flex-wrap flex-col md:flex-row justify-end my-4">
+                {{-- Commune --}}
+                <div class="mx-5">
+                  <div class="m-2">
+                    <label class="text-lg text-white" for="commune"> Commune / Quartier</label>
+                  </div>
+                  <div>
+                    <select class="rounded-full text-black" name="commune" id="commune">
+                      @foreach ($commumes as $commune)
+                          <option value="{{$commune->id}}">
+                            <div class="flex justify-left text-black">
+                                <img class="px-2" src="{{ asset('flags/'.$commune->city->country->country_code.'.png') }}" style="height: 1rem">
+                                <span  class="">{{  $commune->name  }} ({{  $commune->city->name  }} {{  $commune->city->country->country_code  }})</span>
+                            </div>
+                            
+                          </option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+
+                {{-- Type --}}
+                <div class="mx-5">
+                  <div class="m-2">
+                    <label class="text-lg text-white" for="commune"> Type de propriétée</label>
+                  </div>
+                  <div>
+                    <select class="rounded-full text-black" name="commune" id="commune">
+                      @foreach ($commumes as $commune)
+                          <option value="{{$commune->id}}">
+                            <div class="flex justify-left text-black">
+                                <img class="px-2" src="{{ asset('flags/'.$commune->city->country->country_code.'.png') }}" style="height: 1rem">
+                                <span  class="">{{  $commune->name  }} ({{  $commune->city->name  }} {{  $commune->city->country->country_code  }})</span>
+                            </div>
+                            
+                          </option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-end my-4">
+                <div class="mx-5">
+                  <div class="m-2">
+                  <label class="text-lg text-white" for="commune"> Achat / Location</label>
+                  </div>
+                  <select class="rounded-full text-black" name="commune" id="commune">
+                    @foreach ($commumes as $commune)
+                        <option value="{{$commune->id}}">
+                          <div class="flex justify-left text-black">
+                              <img class="px-2" src="{{ asset('flags/'.$commune->city->country->country_code.'.png') }}" style="height: 1rem">
+                              <span  class="">{{  $commune->name  }} ({{  $commune->city->name  }} {{  $commune->city->country->country_code  }})</span>
+                          </div>
+                          
+                        </option>
+                    @endforeach
+                  </select>
+                </div>  
+              </div>
+                <div class="flex justify-end px-4">
+                  <button class="mx-5 lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    Rechercher
+                  </button>
+                </div>
+
+            </form>
           </div>
         </div>
       </div>
-      <div class="relative -mt-12 lg:-mt-24">
+      {{-- <div class="relative -mt-12 lg:-mt-24">
         <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-2.000000, 44.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -41,7 +112,7 @@
             </g>
           </g>
         </svg>
-      </div>
+      </div> --}}
       <section class="bg-white border-b py-8">
         <div class="container max-w-5xl mx-auto m-8">
           <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
@@ -61,9 +132,9 @@
                 <br />
                 <br />
   
-                Télechargez notre application sur le Play Store
+                Retrouvez nous sur le Play Store
   
-                <a class="text-pink-500 underline" href="https://undraw.co/">undraw.co</a>
+                <a class="text-orange-500 underline" href="https://undraw.co/">Pyra Immo</a>
               </p>
             </div>
             <div class="w-full sm:w-1/2 p-6">

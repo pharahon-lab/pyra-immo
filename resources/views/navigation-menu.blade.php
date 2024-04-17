@@ -22,7 +22,7 @@
                 <!-- Maisons -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('catalogue.places.index') }}" :active="request()->routeIs('catalogue.places.index')">
-                        {{ __('Maisons') }}
+                        {{ __('Mes propriétées') }}
                     </x-nav-link>
                 </div>
 
@@ -30,14 +30,14 @@
                 <!-- Finances constrainded in team -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('catalogue.finances.index') }}" :active="request()->routeIs('catalogue.finances.index')">
-                        {{ __('Finances') }}
+                        {{ __('Mes finances') }}
                     </x-nav-link>
                 </div>
                 
                 <!-- Abonnements constrained in teams-->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('catalogue.abonnement.index') }}" :active="request()->routeIs('catalogue.abonnement.index')">
-                        {{ __('Abonnements') }}
+                        {{ __('Mes abonnements') }}
                     </x-nav-link>
                 </div>
 
@@ -167,6 +167,18 @@
             <x-responsive-nav-link href="{{ route('catalogue.dashboard') }}" :active="request()->routeIs('catalogue.dashboard')">
                 {{ __('Mon catatalogue') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('catalogue.places.index') }}" :active="request()->routeIs('catalogue.places.index')">
+                {{ __('Mes propriétées') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('catalogue.finances.index') }}" :active="request()->routeIs('catalogue.finances.index')">
+                {{ __('Mes finances') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link href="{{ route('catalogue.abonnement.index') }}" :active="request()->routeIs('catalogue.abonnement.index')">
+                {{ __('Mes abonnements') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -190,11 +202,11 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
-                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                {{-- @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
                     </x-responsive-nav-link>
-                @endif
+                @endif --}}
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
@@ -202,7 +214,7 @@
 
                     <x-responsive-nav-link href="{{ route('logout') }}"
                             @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Déconexion') }}
                     </x-responsive-nav-link>
                 </form>
 
@@ -219,14 +231,14 @@
                         {{ __('Team Settings') }}
                     </x-responsive-nav-link>
 
-                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                    {{-- @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                         <x-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
                             {{ __('Create New Team') }}
                         </x-responsive-nav-link>
-                    @endcan
+                    @endcan --}}
 
                     <!-- Team Switcher -->
-                    @if (Auth::user()->allTeams()->count() > 1)
+                    {{-- @if (Auth::user()->allTeams()->count() > 1)
                         <div class="border-t border-gray-200"></div>
 
                         <div class="block px-4 py-2 text-xs text-gray-400">
@@ -236,7 +248,7 @@
                         @foreach (Auth::user()->allTeams() as $team)
                             <x-switchable-team :team="$team" component="responsive-nav-link" />
                         @endforeach
-                    @endif
+                    @endif --}}
                 @endif
             </div>
         </div>

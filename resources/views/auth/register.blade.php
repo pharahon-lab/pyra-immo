@@ -81,7 +81,7 @@
                         {{ __('Déjâ inscript?') }}
                     </a>
     
-                    <x-button class="ms-4">
+                    <x-button class="ms-4 bg-orange-500">
                         {{ __('Inscription') }}
                     </x-button>
                 </div>

@@ -17,7 +17,13 @@ class TransactionsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'transaction_number' => '000BasePyraImmo',
+            'operation_id' => '000BasePyraImmo',
+            'date_transaction' => today(),
+            'amount' => '0',
+            'transaction_way' => 'PyraImmo',
+            'transaction_type' => 'free_from_Pyra_Immo',
+            'is_validated' => 1,
         ];
     }
 }

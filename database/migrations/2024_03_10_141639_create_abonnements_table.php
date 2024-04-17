@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->foreignUuid('facade_id')->constrained('fascade_immos')->onDelete('cascade');
 
-            $table->foreignUuid('transaction_id')->constrained();
+            $table->foreignUuid('transaction_id')->constrained()->nullable();
 
             $table->unsignedBigInteger('type_abonnement_id');
             $table->foreign('type_abonnement_id')->references('id')->on('abonnement_types');

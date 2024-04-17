@@ -12,6 +12,7 @@ use App\Models\PassType;
 use Illuminate\Database\Seeder;
 use \App\Models\User;
 use \App\Models\Team;
+use App\Models\Transactions;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class DatabaseSeeder extends Seeder
@@ -105,7 +106,7 @@ class DatabaseSeeder extends Seeder
                 'max_video' => 1,
                 'max_video_second' => 30,
                 'max_user' => 3,
-                'freeviews' => 2,
+                'freeviews' => 5,
                 'type' => 'company',
                 'price' => 30000,
                 'user_price' => 5000,
@@ -119,7 +120,7 @@ class DatabaseSeeder extends Seeder
                 'max_video' => 2,
                 'max_video_second' => 30,
                 'max_user' => 10,
-                'freeviews' => 2,
+                'freeviews' => 10,
                 'type' => 'company',
                 'price' => 50000,
                 'user_price' => 5000,
@@ -133,7 +134,7 @@ class DatabaseSeeder extends Seeder
                 'max_video' => 2,
                 'max_video_second' => 120,
                 'max_user' => 10000,
-                'freeviews' => 2,
+                'freeviews' => 30,
                 'type' => 'company',
                 'price' => 100000,
                 'user_price' => 5000,
@@ -217,6 +218,19 @@ class DatabaseSeeder extends Seeder
         PassType::factory()->count(3)->sequence(
             fn (Sequence $sequence) => $passType[$sequence->index]
         )->create();
+
+        Transactions::factory()->create(
+            [
+                'transaction_number' => '000BasePyraImmo',
+                'operation_id' => '000BasePyraImmo',
+                'date_transaction' => today(),
+                'amount' => '0',
+                'transaction_way' => 'PyraImmo',
+                'transaction_type' => 'free_from_Pyra_Immo',
+                'is_validated' => 1,
+                
+            ]
+        );
 
     }
 }

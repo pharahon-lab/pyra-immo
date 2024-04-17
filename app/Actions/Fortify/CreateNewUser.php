@@ -5,6 +5,8 @@ namespace App\Actions\Fortify;
 use App\Models\FascadeImmo;
 use App\Models\Team;
 use App\Models\User;
+use App\Services\AbonnementServices;
+use App\Services\TransactionServices;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -53,7 +55,8 @@ class CreateNewUser implements CreatesNewUsers
      * Create a personal team for the user.
      */
     protected function createFascade(User $user): void
-    {
+    {   
+        $abonnementServices = new AbonnementServices();
         $f = FascadeImmo::forceCreate([
             'user_id' => $user->id,
             'name' => $user->name,
@@ -64,6 +67,7 @@ class CreateNewUser implements CreatesNewUsers
         $f->save();
         $user->fascade_immo_id = $f->id;
         $user->save();
+        $abonnementServices->defaultAbonnement($user);
     }
 
 

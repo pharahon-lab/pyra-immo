@@ -4,9 +4,10 @@ namespace App\Actions;
 
 use App\Models\Transactions;
 use Illuminate\Http\Request;
+use App\Services\AbonnementServices;
 
 class BuyAbonnement{
-    public function handle(Request $request, Transactions $transaction){
+    public function handle(Request $request, Transactions $transaction, AbonnementServices $abonnementServices){
         /// here we will handle the action of buying an abonnement. 
         /// this appen after the transaction have been create and verified
         /// From the request we will get

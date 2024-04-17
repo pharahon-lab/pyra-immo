@@ -16,7 +16,8 @@
 
 <style>
     .gradient {
-      background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+      background: linear-gradient(90deg, #daae51 0%, #ff7f27 100%);
+      /* background: linear-gradient(90deg, #d53369 0%, #daae51 100%); */
     }
   </style>
 
