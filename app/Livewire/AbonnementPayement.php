@@ -12,10 +12,12 @@ use Livewire\Component;
 class AbonnementPayement extends Component
 {
     public $abonnement_type; // Data passed from the controller
+    public $duration;
 
     public function mount($ab_type)
     {
         $this->abonnement_type =  AbonnementType::where('id' , $ab_type)->first();
+        $this->duration = 1;
     }
 
     public function render()
@@ -26,6 +28,17 @@ class AbonnementPayement extends Component
     public function checkPromo($promotion_code)
     {
         
+    }
+
+    public function timeline($selected)
+    {
+        $this->dispatch('test', duration : 'test');
+        $message = 'tsettesete';
+        print($message);
+        flush();
+        ob_flush();
+        $this->duration = $selected;
+        $this->dispatch('duration', duration : $this->duration);
     }
     
     public function buyAbonnement(AbonnementServices $abonnementService, TransactionServices $transactionService)

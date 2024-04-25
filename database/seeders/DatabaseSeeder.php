@@ -145,17 +145,17 @@ class DatabaseSeeder extends Seeder
 
         $passType = [
             [
-                'name' => 'Pass 5 maisons',
+                'name' => 'Bronze',
                 'nb_visite' => 5,
                 'price' => '2000',
             ],
             [
-                'name' => 'Pass 10 maisons',
+                'name' => 'Argent',
                 'nb_visite' => 10,
                 'price' => '3000',
             ],
             [
-                'name' => 'Pass 20 maisons',
+                'name' => 'OR',
                 'nb_visite' => 20,
                 'price' => '5000',
             ],

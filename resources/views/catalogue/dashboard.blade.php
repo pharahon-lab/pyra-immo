@@ -42,7 +42,7 @@
 
                     </div>
 
-                    <h3 class="mt-8 mb-4 text-xl font-medium text-green-900">
+                    <h3 class="mt-8 mb-4 text-xl font-medium  text-orange-500">
                         {{ Auth::user()->fascadeImmo->balance}} f CFA
                     </h3>
 
@@ -58,103 +58,57 @@
 
                 </div>
 
-                <div class="flex justify-evenly">
-                    <div class="flex max-w-40 items-center text-black bg-white  rounded-lg p-2">
-                        <div>
-                            <div>
-                                <strong>Propriétées</strong>
-                            </div>
-                            <div>
-                                <span>XXXXX</span>
-                            </div>
-                        </div>
+                <div class="flex justify-evenly m-4">
+                    
+                    <div class="flex-col">
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
+                        <h4 class="text-xs text-gray-600 font-semibold m-4">Propriétées</h4>
                     </div>
 
                     
-                    <div class="flex max-w-40 items-center text-black bg-white rounded-lg p-2 m-3">
-                        <div>
-                            <div>
-                                <strong>Freeview</strong>
-                            </div>
-                            <div>
-                                <span>XXXXX Propriétées</span>
-                            </div>
-                        </div>
+                    <div class="flex-col">
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
+                        <h4 class="text-xs text-gray-600 font-semibold m-4">Propriétées en freeview</h4>
                     </div>
 
                     
-                    <div class="flex max-w-40 items-center text-black bg-white rounded-lg p-2">
-                        <div>
-                            <div>
-                                <strong>Visites Totals</strong>
-                            </div>
-                            <div>
-                                <span>XXXXX</span>
-                            </div>
-                        </div>
+                    <div class="flex-col">
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
+                        <h4 class="text-xs text-gray-600 font-semibold m-4">Visites Totals</h4>
                     </div>
 
                     
-                    <div class="flex max-w-40 items-center text-black bg-white rounded-lg p-2">
-                        <div>
-                            <div>
-                                <strong>Abonnement</strong>
-                            </div>
-                            <div>
-                                <span>XXXXX</span>
-                            </div>
-                        </div>
+                    <div class="flex-col">
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->latestAbonnement->abonnement_type->title }}</h4>
+                        <h4 class="text-xs text-gray-600 font-semibold m-4">Abonnement</h4>
                     </div>
                 </div>
 
 
-                <div class="flex justify-evenly">
-                    <div class="flex max-w-50 items-center text-black bg-white  rounded-lg p-2">
-                        <div>
-                            <div>
-                                <strong>Vues cette semaine</strong>
-                            </div>
-                            <div>
-                                <span>XXXXX</span>
-                            </div>
-                        </div>
+                <div class="flex justify-evenly m-4">
+
+                    
+                    <div class="flex-col">
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
+                        <h4 class="text-xs text-gray-600 font-semibold m-4">Vues cette semaine</h4>
+                    </div>
+                    
+                    <div class="flex-col">
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
+                        <h4 class="text-xs text-gray-600 font-semibold m-4">Vues ce mois</h4>
+                    </div>
+                    
+                    <div class="flex-col">
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
+                        <h4 class="text-xs text-gray-600 font-semibold m-4">Visites cette semaine</h4>
+                    </div>
+                    
+                    <div class="flex-col">
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
+                        <h4 class="text-xs text-gray-600 font-semibold m-4">Visites ce mois</h4>
                     </div>
 
                     
-                    <div class="flex max-w-40 items-center text-black bg-white rounded-lg p-2 m-3">
-                        <div>
-                            <div>
-                                <strong>Vues du mois</strong>
-                            </div>
-                            <div>
-                                <span>XXXXX</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                    <div class="flex max-w-50 items-center text-black bg-white rounded-lg p-2">
-                        <div>
-                            <div>
-                                <strong>Visites cette semaine</strong>
-                            </div>
-                            <div>
-                                <span>XXXXX</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                    <div class="flex max-w-40 items-center text-black bg-white rounded-lg p-2">
-                        <div>
-                            <div>
-                                <strong>Visites du mois</strong>
-                            </div>
-                            <div>
-                                <span>XXXXX</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 

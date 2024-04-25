@@ -25,6 +25,28 @@
           <div class="w-full md:w-3/5 py-6 text-center">
 
             <form action="" method="post">
+              
+              {{-- Achat / Location --}}
+              <div class="flex justify-end my-4">
+                <div class="mx-5">
+                  <div class="m-2">
+                  <label class="text-lg text-white" for="transaction"> Achat / Location</label>
+                  </div>
+                  <select class="rounded-full text-black" name="transaction" id="transaction">
+                    <option value="achat">
+                      <div class="flex justify-left text-black">
+                          <span  class="">Achat</span>
+                      </div>
+                    </option>
+                    <option value="location">
+                      <div class="flex justify-left text-black">
+                          <span  class="">Location</span>
+                      </div>
+                    </option>
+                  </select>
+                </div>  
+              </div>
+
               <div class="mx-auto flex flex-wrap flex-col md:flex-row justify-end my-4">
                 {{-- Commune --}}
                 <div class="mx-5">
@@ -46,44 +68,43 @@
                   </div>
                 </div>
 
-                {{-- Type --}}
+                {{-- Type Proprietée--}}
                 <div class="mx-5">
                   <div class="m-2">
-                    <label class="text-lg text-white" for="commune"> Type de propriétée</label>
+                    <label class="text-lg text-white" for="propriete"> Type de propriétée</label>
                   </div>
                   <div>
-                    <select class="rounded-full text-black" name="commune" id="commune">
-                      @foreach ($commumes as $commune)
-                          <option value="{{$commune->id}}">
-                            <div class="flex justify-left text-black">
-                                <img class="px-2" src="{{ asset('flags/'.$commune->city->country->country_code.'.png') }}" style="height: 1rem">
-                                <span  class="">{{  $commune->name  }} ({{  $commune->city->name  }} {{  $commune->city->country->country_code  }})</span>
-                            </div>
-                            
-                          </option>
-                      @endforeach
+                    <select class="rounded-full text-black" name="propriete" id="propriete">
+                      <option value="bureau">
+                        <div class="flex justify-left text-black">
+                            <span  class="">Bureau</span>
+                        </div>
+                      </option>
+                      <option value="logement">
+                        <div class="flex justify-left text-black">
+                            <span  class="">Logement</span>
+                        </div>
+                      </option>
+                      <option value="magasin">
+                        <div class="flex justify-left text-black">
+                            <span  class="">Magasin</span>
+                        </div>
+                      </option>
+                      <option value="terrain">
+                        <div class="flex justify-left text-black">
+                            <span  class="">Terrain nu</span>
+                        </div>
+                      </option>
+                      <option value="passage">
+                        <div class="flex justify-left text-black">
+                            <span  class="">Hotel/residence</span>
+                        </div>
+                      </option>
                     </select>
                   </div>
                 </div>
               </div>
-              <div class="flex justify-end my-4">
-                <div class="mx-5">
-                  <div class="m-2">
-                  <label class="text-lg text-white" for="commune"> Achat / Location</label>
-                  </div>
-                  <select class="rounded-full text-black" name="commune" id="commune">
-                    @foreach ($commumes as $commune)
-                        <option value="{{$commune->id}}">
-                          <div class="flex justify-left text-black">
-                              <img class="px-2" src="{{ asset('flags/'.$commune->city->country->country_code.'.png') }}" style="height: 1rem">
-                              <span  class="">{{  $commune->name  }} ({{  $commune->city->name  }} {{  $commune->city->country->country_code  }})</span>
-                          </div>
-                          
-                        </option>
-                    @endforeach
-                  </select>
-                </div>  
-              </div>
+
                 <div class="flex justify-end px-4">
                   <button class="mx-5 lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                     Rechercher
@@ -113,6 +134,8 @@
           </g>
         </svg>
       </div> --}}
+
+      {{-- PRESENTATION DE LA PLATEFORME --}}
       <section class="bg-white border-b py-8">
         <div class="container max-w-5xl mx-auto m-8">
           <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
@@ -438,6 +461,8 @@
           </div>
         </div>
       </section>
+
+      {{-- PRIX PASS --}}
       <section class="bg-gray-100 py-8">
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
           <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
@@ -447,68 +472,36 @@
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
           </div>
           <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
-            <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-              <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="p-8 text-3xl font-bold text-center border-b-4">
-                  pass bronze
-                </div>
-                <ul class="w-full text-center text-sm">
-                  <li class="border-b py-4">5 visites</li>
-                </ul>
-              </div>
-              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                  3 000 f cfa
-                </div>
-                <div class="flex items-center justify-center">
-                  <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Payer
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
+
+            @foreach ($pass_types as $pass_ty)
+            <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-4 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
               <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="w-full p-8 text-3xl font-bold text-center">Argent</div>
+                <div class="w-full p-8 text-3xl font-bold text-center">{{ $pass_ty->name }}</div>
                 <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
                 <ul class="w-full text-center text-base font-bold">
-                  <li class="border-b py-4">10 visites</li>
+                  <li class="border-b py-4">{{ $pass_ty->nb_visite }} visites</li>
                 </ul>
               </div>
               <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                 <div class="w-full pt-6 text-4xl font-bold text-center">
-                  5 000 f cfa
+                  {{ $pass_ty->price }} f cfa
                 </div>
                 <div class="flex items-center justify-center">
-                  <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                  <a  href="{{ route('home.pass.index') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                     Payer
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-              <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="p-8 text-3xl font-bold text-center border-b-4">
-                  Or
-                </div>
-                <ul class="w-full text-center text-sm">
-                  <li class="border-b py-4">25 visites</li>
-                </ul>
-              </div>
-              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                  10 000 f cfa
-                </div>
-                <div class="flex items-center justify-center">
-                  <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    Payer
-                  </button>
-                </div>
-              </div>
-            </div>
+                
+            @endforeach
+
+
           </div>
         </div>
       </section>
+
+      {{-- PUBLICATION ANNONCE  --}}
       <section class="bg-white border-b py-8">
         <div class="container mx-auto flex flex-wrap pt-4 pb-12">
           <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
@@ -578,82 +571,47 @@
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
           </div>
           <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
-            <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-              <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="p-8 text-3xl font-bold text-center border-b-4">
-                  Gratuit
+            
+            @foreach ($abonnement_types as $ab_ty)
+                @if ($ab_ty->type === 'personal')
+                <div class="flex flex-col w-5/6 lg:w-1/4 mx-3 lg:mx-3 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
+                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                    <div class="w-full p-8 text-3xl font-bold text-center">{{ $ab_ty->title }}</div>
+                    <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
+                    <ul class="w-full text-center text-base font-bold">
+                        <li class="border-b py-4">{{ $ab_ty->max_place }} propriétées max</li>
+                        <li class="border-b py-4">{{ $ab_ty->freeviews }} Free View</li>
+                        <li class="border-b py-4">{{ $ab_ty->max_image }} images / propriétée</li>
+                        <li class="border-b py-4">{{ $ab_ty->max_video }} videos ({{ $ab_ty->max_video_second }} seconds) / propriétée</li>
+                        <li class="border-b py-4">{{ $ab_ty->pourcentage_demarcheur }} % par visites payantes</li>
+                    </ul>
                 </div>
-                <ul class="w-full text-center text-sm">
-                  <li class="border-b py-4">3 propriétées max</li>
-                  <li class="border-b py-4">Pas d'accès au Free View</li>
-                  <li class="border-b py-4">5 images / propriétée</li>
-                </ul>
-              </div>
-              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                  0 f cfa
-                  <div>
-                    <span class="text-base">Pour 1 utilisateur</span>
-                  </div>
+                <div class="flex-none bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
+                    @if ($ab_ty->promo_general)
+                        <div class="flex justify-center w-all m-2 px-2">
+                            <h4  class="mx-2 text-lg text-orange-600 line-through font-semibold">{{ $ab_ty->price}}  F CFA</h4>
+                            <h4  class="mx-2 text-lg">( - {{ $ab_ty->promo_general->reduction }}% )</h4>
+                        </div>
+                        <div class="flex justify-center w-all m-2 px-2">
+                            <h3  class="mx-2 font-bold text-3xl text-orange-600" >{{ ($ab_ty->price / 100) * (100 - $ab_ty->promo_general->reduction) }} F CFA / mois</h3>
+                        </div>
+                        
+                    @else
+                        <div class="w-full pt-6 text-3xl font-bold text-center text-orange-600">
+                            {{ $ab_ty->price }} F CFA / mois
+                        </div>
+                        
+                    @endif
+                        <span class="text-base flex justify-center"> + {{ $ab_ty->user_price }} f cfa/ Par utilisateur ({{ $ab_ty->max_user }} max)</span>
+                    <div class="flex items-center justify-center">
+                        <a href="{{ route('catalogue.abonnement.resume', ['ab_type' => $ab_ty]) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                            Payer
+                        </a>
+                    </div>
                 </div>
-                <div class="flex items-center justify-center">
-                    <a href="{{ route('catalogue.abonnement.index') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                      S'abonner
-                    </a>
                 </div>
-              </div>
-            </div>
-            <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
-              <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="w-full p-8 text-3xl font-bold text-center">Démarcheur</div>
-                <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
-                <ul class="w-full text-center text-base font-bold">
-                  <li class="border-b py-4">5 propriétées max</li>
-                  <li class="border-b py-4">accès Free View</li>
-                  <li class="border-b py-4">5 images / propriétée</li>
-                </ul>
-              </div>
-              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-4xl font-bold text-center">
-                 10 000 f cfa
-                 <div>
-                   <span class="text-base">Pour 1 utilisateur</span>
-                 </div>
-                </div>
-                <div class="flex items-center justify-center">
-                    <a href="{{ route('catalogue.abonnement.index') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                      S'abonner
-                    </a>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-              <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="p-8 text-3xl font-bold text-center border-b-4">
-                  Agent Immobilier
-                </div>
-                <ul class="w-full text-center text-sm">
-                    <li class="border-b py-4">10 propriétées max</li>
-                    <li class="border-b py-4">1 Free View</li>
-                    <li class="border-b py-4">5 images / propriétée</li>
-                    <li class="border-b py-4">1 video (30 seconds) / propriétée</li>
-                </ul>
-              </div>
-              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                  25 000 fcfa
-                  <div>
-                    <span class="text-base">Pour 1 utilisateur</span>
-                  </div>
-                  
-                </div>
-                <div class="flex items-center justify-center">
-                    <a href="{{ route('catalogue.abonnement.index') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                      S'abonner
-                    </a>
-                </div>
-              </div>
-            </div>
+                @endif 
+            @endforeach
           </div>
         </div>
       </section>
@@ -668,122 +626,49 @@
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
           </div>
           <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
-            <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-              <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="p-8 text-3xl font-bold text-center border-b-4">
-                  Petite Agence
+            @foreach ($abonnement_types as $ab_ty)
+                @if ($ab_ty->type === 'company')
+                <div class="flex flex-col w-5/6 lg:w-1/4 mx-3 lg:mx-3 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
+                <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                    <div class="w-full p-8 text-3xl font-bold text-center">{{ $ab_ty->title }}</div>
+                    <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
+                    <ul class="w-full text-center text-base font-bold">
+                        <li class="border-b py-4">{{ $ab_ty->max_place }} propriétées max</li>
+                        <li class="border-b py-4">{{ $ab_ty->freeviews }} Free View</li>
+                        <li class="border-b py-4">{{ $ab_ty->max_image }} images / propriétée</li>
+                        <li class="border-b py-4">{{ $ab_ty->max_video }} videos ({{ $ab_ty->max_video_second }} seconds) / propriétée</li>
+                        <li class="border-b py-4">{{ $ab_ty->pourcentage_demarcheur }} % par visites payantes</li>
+                    </ul>
                 </div>
-                <ul class="w-full text-center text-sm">
-                    <li class="border-b py-4">25 propriétées max</li>
-                    <li class="border-b py-4">2 Free View</li>
-                    <li class="border-b py-4">10 images / propriétée</li>
-                    <li class="border-b py-4">1 videos (30 seconds) / propriétée</li>
-                </ul>
-              </div>
-              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                  30 000 cfa
-                  <div>
-                    <span class="text-base"> + 5 000 f cfa/ Par utilisateur (3 max)</span>
-                  </div>
+                <div class="flex-none bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
+                    @if ($ab_ty->promo_general)
+                        <div class="flex justify-center w-all m-2 px-2">
+                            <h4  class="mx-2 text-lg text-orange-600 line-through font-semibold">{{ $ab_ty->price}}  F CFA</h4>
+                            <h4  class="mx-2 text-lg">( - {{ $ab_ty->promo_general->reduction }}% )</h4>
+                        </div>
+                        <div class="flex justify-center w-all m-2 px-2">
+                            <h3  class="mx-2 font-bold text-3xl text-orange-600" >{{ ($ab_ty->price / 100) * (100 - $ab_ty->promo_general->reduction) }} F CFA / mois</h3>
+                        </div>
+
+                    @else
+                        <div class="w-full pt-6 text-3xl font-bold text-center text-orange-600">
+                            {{ $ab_ty->price }} F CFA / mois
+                        </div>
+
+                    @endif
+                        <span class="text-base flex justify-center"> + {{ $ab_ty->user_price }} f cfa/ Par utilisateur ({{ $ab_ty->max_user }} max)</span>
+                    <div class="flex items-center justify-center">
+                        <a href="{{ route('catalogue.abonnement.resume', ['ab_type' => $ab_ty]) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                            Payer
+                        </a>
+                    </div>
                 </div>
-                <div class="flex items-center justify-center">
-                    <a href="{{ route('catalogue.abonnement.index') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                      S'abonner
-                    </a>
                 </div>
-              </div>
-            </div>
-            <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
-              <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="w-full p-8 text-3xl font-bold text-center">Moyenne Agence</div>
-                <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
-                <ul class="w-full text-center text-base font-bold">
-                    <li class="border-b py-4">30 propriétées max</li>
-                    <li class="border-b py-4">2 Free View</li>
-                    <li class="border-b py-4">10 images / propriétée</li>
-                    <li class="border-b py-4">2 videos (30 seconds) / propriétée</li>
-                </ul>
-              </div>
-              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-4xl font-bold text-center">
-                  50 000 fcfa
-                  <div>
-                    <span class="text-base"> + 5 000 f cfa/ Par utilisateur (10 max)</span>
-                  </div>
-                </div>
-                <div class="flex items-center justify-center">
-                  <a href="{{ route('catalogue.abonnement.index') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                    S'abonner
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
-              <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
-                <div class="p-8 text-3xl font-bold text-center border-b-4">
-                  Grosse Agence
-                </div>
-                <ul class="w-full text-center text-sm">
-                    <li class="border-b py-4">100 propriétées max</li>
-                    <li class="border-b py-4">2 Free View</li>
-                    <li class="border-b py-4">10 images / propriétée</li>
-                    <li class="border-b py-4">2 videos (2 minutes) / propriétée</li>
-                </ul>
-              </div>
-              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                  100 000 f cfa
-                  <div>
-                    <span class="text-base"> + 5 000 f cfa/ Par utilisateur </span>
-                  </div>
-                </div>
-                <div class="flex items-center justify-center">
-                    <a href="{{ route('catalogue.abonnement.index') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                      S'abonner
-                    </a>
-                </div>
-              </div>
-            </div>
+                @endif 
+            @endforeach
           </div>
         </div>
       </section>
 
-      <!-- Change the colour #f8fafc to match the previous section colour -->
-      <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g transform="translate(-1.000000, -14.000000)" fill-rule="nonzero">
-            <g class="wave" fill="#f8fafc">
-              <path
-                d="M1440,84 C1383.555,64.3 1342.555,51.3 1317,45 C1259.5,30.824 1206.707,25.526 1169,22 C1129.711,18.326 1044.426,18.475 980,22 C954.25,23.409 922.25,26.742 884,32 C845.122,37.787 818.455,42.121 804,45 C776.833,50.41 728.136,61.77 713,65 C660.023,76.309 621.544,87.729 584,94 C517.525,105.104 484.525,106.438 429,108 C379.49,106.484 342.823,104.484 319,102 C278.571,97.783 231.737,88.736 205,84 C154.629,75.076 86.296,57.743 0,32 L0,0 L1440,0 L1440,84 Z"
-              ></path>
-            </g>
-            <g transform="translate(1.000000, 15.000000)" fill="#FFFFFF">
-              <g transform="translate(719.500000, 68.500000) rotate(-180.000000) translate(-719.500000, -68.500000) ">
-                <path d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496" opacity="0.100000001"></path>
-                <path
-                  d="M100,104.708498 C277.413333,72.2345949 426.147877,52.5246657 546.203633,45.5787101 C666.259389,38.6327546 810.524845,41.7979068 979,55.0741668 C931.069965,56.122511 810.303266,74.8455141 616.699903,111.243176 C423.096539,147.640838 250.863238,145.462612 100,104.708498 Z"
-                  opacity="0.100000001"
-                ></path>
-                <path d="M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z" opacity="0.200000003"></path>
-              </g>
-            </g>
-          </g>
-        </g>
-      </svg>
-      <section class="container mx-auto text-center py-6 mb-12">
-        <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
-          Call to Action
-        </h2>
-        <div class="w-full mb-4">
-          <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
-        </div>
-        <h3 class="my-4 text-3xl leading-tight">
-          Main Hero Message to sell yourself!
-        </h3>
-        <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-          Action!
-        </button>
-      </section>
 
 </x-customer-layout>

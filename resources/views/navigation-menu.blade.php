@@ -36,7 +36,7 @@
                 
                 <!-- Abonnements constrained in teams-->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('catalogue.abonnement.index') }}" :active="request()->routeIs('catalogue.abonnement.index')">
+                    <x-nav-link href="{{ route('catalogue.abonnement.index') }}" :active="request()->routeIs('catalogue.abonnement.*')">
                         {{ __('Mes abonnements') }}
                     </x-nav-link>
                 </div>

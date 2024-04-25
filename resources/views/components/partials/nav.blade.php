@@ -1,8 +1,8 @@
 
-<nav id="header" class="fixed w-full z-30 top-0 text-white ">
+<nav id="header" class="fixed w-full z-30 top-0 text-white  bg-orange-300">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
       <div class="pl-4 flex items-center">
-        <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+        <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"  href="{{ route('home') }}">
           <div class="flex justify-left">
             <img class="mx-2" src="{{ asset('images/logo.png') }}" alt="" srcset="" style="height: 3rem"> 
             Pyra Immo
@@ -35,6 +35,9 @@
         >
           Action
         </button> --}}
+        <div class="mx-auto">
+          @livewire('pass-short')
+        </div>
 
         @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10 mx-2">
