@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
 
 
@@ -17,7 +18,7 @@ class Place extends Model
     
 
     public $incrementing = false;
-     
+    
     /**
      * Generate a new UUID for the model.
      */
@@ -34,5 +35,11 @@ class Place extends Model
     public function uniqueIds(): array
     {
         return ['id'];
+    }
+
+    
+    public function fascade(): BelongsTo
+    {
+        return $this->belongsTo(FascadeImmo::class);
     }
 }

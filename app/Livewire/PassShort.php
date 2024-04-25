@@ -13,6 +13,8 @@ class PassShort extends Component
     public $hasPass;
     public $pass;
 
+    public $pass_code;
+
     public function mount()
     {
         $this->hasPass = false;
@@ -24,9 +26,9 @@ class PassShort extends Component
         }
     }
 
-    public function checkPass($code)
+    public function checkPass()
     {
-        $this->pass = Pass::where('code', $code)->first();
+        $this->pass = Pass::where('code', $this->pass_code)->first();
         if($this->pass){
             $this->hasPass = true;
             Session(['pass' => $this->pass]);

@@ -25,7 +25,7 @@
           <div class="w-full md:w-3/5 py-6 text-center">
 
             <form action="" method="post">
-              
+
               {{-- Achat / Location --}}
               <div class="flex justify-end my-4">
                 <div class="mx-5">
@@ -446,15 +446,10 @@
                 <p class="text-gray-600 mb-8">
                   Utilisez votre passe visite pour rechercher et consulter les contacts d'une maison ou naviguez librement dans les catalogues.
                   <br />
-                  <br />
-                  Consultez nos offres de pass
+                  <br />  
+                  Consultez nos offres de pass: 
   
-                  <a class="text-pink-500 underline" href="https://undraw.co/">undraw.co</a>
-                  
-                  <br />
-                  Entrez le code de votre pass
-  
-                  <a class="text-pink-500 underline" href="https://undraw.co/">undraw.co</a>
+                  <a class="text-orange-500 underline" href="#pass_prix">offres pass visite</a>
                 </p>
               </div>
             </div>
@@ -463,7 +458,7 @@
       </section>
 
       {{-- PRIX PASS --}}
-      <section class="bg-gray-100 py-8">
+      <section class="bg-gray-100 py-8" id="pass_prix">
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
           <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
             Prix Pass
@@ -487,7 +482,7 @@
                   {{ $pass_ty->price }} f cfa
                 </div>
                 <div class="flex items-center justify-center">
-                  <a  href="{{ route('home.pass.index') }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                  <a  href="{{ route('home.pass.payer', ['pass_type' => $pass_ty]) }}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                     Payer
                   </a>
                 </div>

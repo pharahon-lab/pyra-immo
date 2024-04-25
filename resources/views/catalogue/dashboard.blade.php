@@ -61,7 +61,7 @@
                 <div class="flex justify-evenly m-4">
                     
                     <div class="flex-col">
-                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->countPlaces() }}</h4>
                         <h4 class="text-xs text-gray-600 font-semibold m-4">Propriétées</h4>
                     </div>
 

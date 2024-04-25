@@ -3,10 +3,19 @@
   
   @php
     $pass_types = App\Models\PassType::all();
+    $pass = Session('pass');
   @endphp
+
     
       {{-- PRIX PASS --}}
       <section class="bg-gray-100 py-8 my-8">
+        @if ($pass)
+          <div class="flex justify-center my-5">
+            <h3 class="text-lg text-orange-500 mx-4">{{ $pass->nb_visite }} visite(s)</h3>
+            <h3 class="text-lg text-orange-500 mx-4">expire le {{ $pass->end_date }}</h3>
+          </div>
+        @endif
+        
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800 h-full">
         <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
             Prix Pass

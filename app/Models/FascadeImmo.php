@@ -49,4 +49,22 @@ class FascadeImmo extends Model
         return $this->hasOne(Abonnement::class, 'facade_id')->latestOfMany('created_at');
     }
 
+    
+    public function places(): HasMany
+    {
+        return $this->hasMany(Place::class, 'facade_id');
+    }
+
+    // get the places that are on free view
+    public function freeViewPlaces(): HasMany
+    {
+        return $this->hasMany(Place::class, 'facade_id');
+    }
+    // get the places that are on free view
+    public function countPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->count();
+    }
+
+
 }
