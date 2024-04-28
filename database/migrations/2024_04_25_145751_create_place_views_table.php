@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('free_views', function (Blueprint $table) {
+        Schema::create('place_views', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('pass_id')->constrained('passes');
 
             $table->foreignUuid('place_id')->constrained('places');
+            
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('free_views');
+        Schema::dropIfExists('place_views');
     }
 };

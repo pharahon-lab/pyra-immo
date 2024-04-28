@@ -10,10 +10,21 @@
       {{-- PRIX PASS --}}
       <section class="bg-gray-100 py-8 my-8">
         @if ($pass)
-          <div class="flex justify-center my-5">
-            <h3 class="text-lg text-orange-500 mx-4">{{ $pass->nb_visite }} visite(s)</h3>
-            <h3 class="text-lg text-orange-500 mx-4">expire le {{ $pass->end_date }}</h3>
+          <div class="flex justify-center mt-12">
+            <div class="w-1/3 lg:w-1/3 mx-auto lg:mx-4 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
+              <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                  <div class="w-full p-8 text-xl font-bold text-center text-black">{{ $pass->nb_visite }} visites</div>
+                  <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
+              </div>
+              <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
+                  <div class="w-full pt-6 text-4xl font-bold text-orange-600 text-center">
+                      {{ $pass->code }}
+                  </div>
+                  <p class="w-full text-center text-base py-4  text-black" >Expire le:  {{ $pass->end_date }}</p>
+              </div>
+            </div>
           </div>
+          
         @endif
         
         <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800 h-full">

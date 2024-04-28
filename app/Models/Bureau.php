@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
 
-
-class Place extends Model
+class Bureau extends Model
 {
     use HasFactory;    
     use HasUuids;
@@ -39,13 +38,13 @@ class Place extends Model
     }
 
     
-    public function fascade(): BelongsTo
+    public function place(): MorphOne
     {
-        return $this->belongsTo(FascadeImmo::class);
+        return $this->morphOne(Place::class, 'placeable');
     }
 
     
-    public function placeable(): MorphTo
+    public function bureauable(): MorphTo
     {
         return $this->morphTo();
     }

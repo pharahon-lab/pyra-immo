@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Ramsey\Uuid\Uuid;
 
-
-class Place extends Model
+class Hotel extends Model
 {
     use HasFactory;    
     use HasUuids;
@@ -39,15 +38,23 @@ class Place extends Model
     }
 
     
-    public function fascade(): BelongsTo
+    public function place(): MorphOne
     {
-        return $this->belongsTo(FascadeImmo::class);
+        return $this->morphOne(Place::class, 'placeable');
     }
-
     
-    public function placeable(): MorphTo
+    public function appartements(): MorphMany
     {
-        return $this->morphTo();
+        return $this->morphMany(Appartement::class, 'appartementable');
     }
-
+    
+    public function studios(): MorphMany
+    {
+        return $this->morphMany(Studio::class, 'studioable');
+    }
+    
+    public function chambres(): MorphMany
+    {
+        return $this->morphMany(Chambre::class, 'chambreable');
+    }
 }
