@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('has_limit')->default(true);
             $table->boolean('is_used')->default(false);
             $table->smallInteger('usage_count')->default(0);
-            $table->smallInteger('limit')->nullable();
+            $table->smallInteger('limit')->nullable()->default(1);
 
             $table->morphs('promotionnable');
 

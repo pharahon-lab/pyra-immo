@@ -26,12 +26,8 @@ class PassController extends Controller
         return view('home.pass.payer', ['pass_type' => $pass_type]);
     }
 
-    public function payement(Request $request, $pass_type_id, PassServices $passService, TransactionServices $transactionServices){
-        $transaction = $transactionServices->freeTrannsaction();
-        $user = User::where('id' , Auth::id())->first();
-        $pass_type = PassType::where('id' , $pass_type_id)->first();
-
-        $pass = $passService->new_pass($pass_type, $transaction);
+    public function payement($pass_id){
+        $pass = Pass::where('id' , $pass_id)->first();
         
         return view('home.pass.pass', ['pass' => $pass]);
     }

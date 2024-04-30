@@ -17,7 +17,7 @@ class AbonnementServices{
 
 
     /// create an abonnement
-    public function newAbonnement(User $user, AbonnementType $abonnementType, Transactions $transaction, bool $afterLast = false) : Abonnement{
+    public function newAbonnement(User $user, AbonnementType $abonnementType, Transactions $transaction, bool $afterLast = false, int $mois = 1) : Abonnement{
         /// create a new abonnement for the user fascade according to the abonnement type and the transaction.
 
         $fascade = $user->fascadeImmo;
@@ -33,10 +33,11 @@ class AbonnementServices{
             $start = today();
         }
 
+        $timeline = '+ '.$mois.' month';
 
         $abonnement = Abonnement::create([
             'start_date' => $start,
-            'end_date' => date('Y-m-d', strtotime('+ 1 month', $start->toDate()->getTimestamp())),
+            'end_date' => date('Y-m-d', strtotime($timeline, $start->toDate()->getTimestamp())),
             'facade_id' => $fascade->id,
             'transaction_id' => $transaction->id,
             'type' => $abonnementType->type,

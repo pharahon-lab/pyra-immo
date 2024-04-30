@@ -21,7 +21,7 @@
             }
           } else {
             // click both outside link and outside menu, hide menu
-            navMenuDiv.classList.add("hidden");
+            // navMenuDiv.classList.add("hidden");
           }
         }
       }

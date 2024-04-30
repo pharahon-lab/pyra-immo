@@ -79,11 +79,7 @@ Route::group(
         Route::group(['prefix' => 'pass',], function(){
             Route::get('/', [PassController::class, 'index'])->name('home.pass.index');
             Route::get('payer/{pass_type}', [PassController::class, 'payer'])->name('home.pass.payer');
-            Route::get('payement/{pass_type}', [PassController::class, 'payement'])->name('home.pass.payement');
-
-            Route::get('edit', [AbonnementController::class, 'edit'])->name('catalogue.abonnement.edit');
-            Route::get('resume/{ab_type}', [AbonnementController::class, 'resume'])->name('catalogue.abonnement.resume');
-            Route::post('payement/{ab_type}', [AbonnementController::class, 'buyAbonnement'])->name('catalogue.abonnement.payement');
+            Route::get('payement/{pass_id}', [PassController::class, 'payement'])->name('home.pass.payement');
             
 
         });
