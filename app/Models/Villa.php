@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Ramsey\Uuid\Uuid;
 
 class Villa extends Model
@@ -40,5 +41,43 @@ class Villa extends Model
     public function place(): MorphOne
     {
         return $this->morphOne(Place::class, 'placeable');
+    }
+
+    
+    public function appartements(): MorphMany
+    {
+        return $this->morphMany(Appartement::class, 'appartementable');
+    }
+    
+    public function studios(): MorphMany
+    {
+        return $this->morphMany(Studio::class, 'studioable');
+    }
+    
+    public function chambres(): MorphMany
+    {
+        return $this->morphMany(Chambre::class, 'chambreable');
+    }
+    
+    
+    
+    public function papers(): MorphOne
+    {
+        return $this->morphOne(LegalPaper::class, 'paperable');
+    }
+    
+    public function interior(): MorphOne
+    {
+        return $this->morphOne(Interior::class, 'interiors');
+    }
+    
+    public function exterior(): MorphOne
+    {
+        return $this->morphOne(Exterior::class, 'exteriorsable');
+    }
+    
+    public function comodities(): MorphOne
+    {
+        return $this->morphOne(Comodities::class, 'comoditiesable');
     }
 }

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('proprio_telephone')->nullable();
             $table->string('photo_couverture')->nullable();
             $table->string('ref')->nullable();
+            $table->longText('conditions')->default('');
             $table->longText('description')->default('');
             $table->boolean('lux')->nullable()->default(false);
 
@@ -37,7 +38,7 @@ return new class extends Migration
             $table->foreignUuid('facade_id')->constrained('fascade_immos')->onDelete('cascade');
             
 
-            $table->morphs('placeable');
+            $table->uuidMorphs('placeable');
 
             $table->timestamps();
 

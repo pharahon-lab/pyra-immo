@@ -42,7 +42,7 @@ class PassServices{
         $pass = Pass::where('id', $pass_id)->first();
         /// 2. get the transaction and pass type, set the start day
         /// 3. update old pass according to the pass type
-        $pass->end_date = date('Y-m-d', strtotime('+ 1 week', $pass->end_date->getTimestamp()));
+        $pass->end_date = date('Y-m-d', strtotime('+ 1 week', date_create($pass->end_date)->getTimestamp()));
         $pass->nb_visite = $pass->nb_visite + $pass_type->nb_visite;
         $pass->pass_type_id = $pass_type->id;
         $pass->transaction_number = $transaction->transaction_number;

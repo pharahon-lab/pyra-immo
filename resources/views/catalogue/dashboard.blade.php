@@ -9,7 +9,7 @@
 
         
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 my-3">
-            <div class="bg-white overflow-hidden  shadow-xl sm:rounded-lg p-3">
+            <div class="gradient overflow-hidden  shadow-xl sm:rounded-lg p-3">
                 <div class="flex justify-evenly">
                     <h1 class="mt-8 mb-4 text-2xl font-medium text-gray-900">
                         {{ Auth::user()->name}}
@@ -62,25 +62,25 @@
                     
                     <div class="flex-col">
                         <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->countPlaces() }}</h4>
-                        <h4 class="text-xs text-gray-600 font-semibold m-4">Propriétées</h4>
+                        <h4 class="text-xs text-center text-gray-600 font-semibold m-4">Propriétées</h4>
                     </div>
 
                     
                     <div class="flex-col">
-                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
-                        <h4 class="text-xs text-gray-600 font-semibold m-4">Propriétées en freeview</h4>
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->countFreeViews() }}</h4>
+                        <h4 class="text-xs text-center text-gray-600 font-semibold m-4">Propriétées en freeview</h4>
                     </div>
 
                     
                     <div class="flex-col">
-                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
-                        <h4 class="text-xs text-gray-600 font-semibold m-4">Visites Totals</h4>
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->countVisites() }}</h4>
+                        <h4 class="text-xs text-center text-gray-600 font-semibold m-4">Visites Totals</h4>
                     </div>
 
                     
                     <div class="flex-col">
                         <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->latestAbonnement->abonnement_type->title }}</h4>
-                        <h4 class="text-xs text-gray-600 font-semibold m-4">Abonnement</h4>
+                        <h4 class="text-xs text-center text-gray-600 font-semibold m-4">Abonnement</h4>
                     </div>
                 </div>
 
@@ -89,23 +89,23 @@
 
                     
                     <div class="flex-col">
-                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
-                        <h4 class="text-xs text-gray-600 font-semibold m-4">Vues cette semaine</h4>
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->countViewsWeek() }}</h4>
+                        <h4 class="text-xs text-center text-gray-600 font-semibold m-4">Vues cette semaine</h4>
                     </div>
                     
                     <div class="flex-col">
-                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
-                        <h4 class="text-xs text-gray-600 font-semibold m-4">Vues ce mois</h4>
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->countViewsMonth() }}</h4>
+                        <h4 class="text-xs text-center text-gray-600 font-semibold m-4">Vues ce mois</h4>
                     </div>
                     
                     <div class="flex-col">
-                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
-                        <h4 class="text-xs text-gray-600 font-semibold m-4">Visites cette semaine</h4>
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->countVisitesWeek() }}</h4>
+                        <h4 class="text-xs text-center text-gray-600 font-semibold m-4">Visites cette semaine</h4>
                     </div>
                     
                     <div class="flex-col">
-                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">XXXXX</h4>
-                        <h4 class="text-xs text-gray-600 font-semibold m-4">Visites ce mois</h4>
+                        <h4 class="text-lg text-center text-orange-500 font-semibold m-4">{{ Auth::user()->fascadeImmo->countVisitesMonth() }}</h4>
+                        <h4 class="text-xs text-center text-gray-600 font-semibold m-4">Visites ce mois</h4>
                     </div>
 
                     

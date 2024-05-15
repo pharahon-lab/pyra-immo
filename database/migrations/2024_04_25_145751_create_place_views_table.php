@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('place_views', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('pass_id')->constrained('passes');
+            $table->foreignUuid('sessions_id')->constrained('sessions');
 
             $table->foreignUuid('place_id')->constrained('places');
             

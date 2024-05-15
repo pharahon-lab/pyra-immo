@@ -58,13 +58,52 @@ class FascadeImmo extends Model
     // get the places that are on free view
     public function freeViewPlaces(): HasMany
     {
-        return $this->hasMany(Place::class, 'facade_id');
+        return $this->hasMany(Place::class, 'facade_id')->where('');
     }
     // get the places that are on free view
     public function countPlaces(): int
     {
         return $this->hasMany(Place::class, 'facade_id')->count();
     }
+    
 
+    public function countFreeViews(): int
+    {
+        return $this->hasManyThrough(FreeViews::class, Place::class, 'facade_id', 'place_id')->count();
+    }
+    public function countViews(): int
+    {
+        return $this->hasManyThrough(PlaceView::class, Place::class, 'facade_id', 'place_id')->count();
+    }
+
+    public function countVisites(): int
+    {
+        return $this->hasManyThrough(VisitesDone::class, Place::class, 'facade_id', 'place_id')->count();
+    }
+
+/// monthly
+    
+    public function countViewsMonth(): int
+    {
+        return $this->hasManyThrough(PlaceView::class, Place::class, 'facade_id', 'place_id')->whereMonth('place_views.created_at', '=', today()->subMonth()->month)->count();
+    }
+
+    public function countVisitesMonth(): int
+    {
+        return $this->hasManyThrough(VisitesDone::class, Place::class, 'facade_id', 'place_id')->whereMonth('visites_dones.created_at', '=', today()->subMonth()->month)->count();
+    }
+
+    
+/// weekly
+    
+    public function countViewsWeek(): int
+    {
+        return $this->hasManyThrough(PlaceView::class, Place::class, 'facade_id', 'place_id')->whereMonth('place_views.created_at', '=', today()->subWeek()->week)->count();
+    }
+
+    public function countVisitesWeek(): int
+    {
+        return $this->hasManyThrough(VisitesDone::class, Place::class, 'facade_id', 'place_id')->whereMonth('visites_dones.created_at', '=', today()->subWeek()->week)->count();
+    }
 
 }

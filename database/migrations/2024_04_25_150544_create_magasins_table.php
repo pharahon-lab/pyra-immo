@@ -14,23 +14,6 @@ return new class extends Migration
         Schema::create('magasins', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->index();
 
-            
-            $table->integer('nombre_piece');
-            $table->integer('nombre_salle_eau');
-            $table->integer('superficie')->default(0);
-            $table->integer('nombre_etage')->nullable();
-            
-            $table->boolean('securite')->nullable()->default(false);
-            $table->boolean('parking')->nullable()->default(false);
-            $table->integer('place_parking')->nullable();
-            $table->boolean('jardin')->nullable()->default(false);
-            $table->boolean('cours_avant')->nullable()->default(false);
-            $table->boolean('cours_arriere')->nullable()->default(false);
-            $table->boolean('balcon_avant')->nullable()->default(false);
-            $table->boolean('balcon_arriere')->nullable()->default(false);
-            $table->boolean('terrasse_avant')->nullable()->default(false);
-            $table->boolean('terrasse_arriere')->nullable()->default(false);
-
             $table->timestamps();
         });
     }

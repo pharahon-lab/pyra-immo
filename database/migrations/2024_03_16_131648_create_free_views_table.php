@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->foreignUuid('place_id')->constrained('places');
+            $table->bigInteger('views')->default(0);
+            $table->dateTime('end_date');
             $table->timestamps();
         });
     }

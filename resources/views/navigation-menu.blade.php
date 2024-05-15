@@ -21,7 +21,7 @@
                 
                 <!-- Maisons -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('catalogue.places.index') }}" :active="request()->routeIs('catalogue.places.index')">
+                    <x-nav-link href="{{ route('catalogue.places.index') }}" :active="request()->routeIs('catalogue.places.*')">
                         {{ __('Mes propriétées') }}
                     </x-nav-link>
                 </div>
@@ -29,7 +29,7 @@
                 
                 <!-- Finances constrainded in team -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('catalogue.finances.index') }}" :active="request()->routeIs('catalogue.finances.index')">
+                    <x-nav-link href="{{ route('catalogue.finances.index') }}" :active="request()->routeIs('catalogue.finances.*')">
                         {{ __('Mes finances') }}
                     </x-nav-link>
                 </div>

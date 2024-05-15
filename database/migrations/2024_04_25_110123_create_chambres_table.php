@@ -14,21 +14,8 @@ return new class extends Migration
         Schema::create('chambres', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->index();
 
-            
-            $table->integer('nombre_piece');
-            $table->integer('nombre_salle_eau');
-            $table->integer('superficie')->default(0);
-            $table->integer('etage')->nullable();
-            $table->integer('numero_de_porte')->nullable();
-            
-            $table->boolean('meuble')->nullable()->default(false);
-            $table->boolean('cuisine')->nullable()->default(false);
-            $table->boolean('chauffe_eau')->nullable()->default(false);
-            $table->boolean('suite')->nullable()->default(false);
-            $table->boolean('climatisation')->nullable()->default(false);
 
-
-            $table->morphs('chambreable');
+            $table->uuidMorphs('chambreable');
 
             $table->timestamps();
         });

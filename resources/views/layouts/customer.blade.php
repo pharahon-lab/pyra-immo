@@ -11,7 +11,9 @@
         <x-ui.alert/>
 
         <div class="leading-normal tracking-normal text-white gradient font-sans text-gray-900 antialiased">
-            {{ $slot }}
+            <div class="h-full">
+                {{ $slot }}
+            </div>
         </div>
 
         <footer>

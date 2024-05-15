@@ -1,3 +1,7 @@
+
+@php
+$pass = Session('pass');
+@endphp
 <div>
     <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
         <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-4 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
@@ -12,10 +16,15 @@
                 <div class="w-full pt-6 text-4xl font-bold text-center">
                     {{ $pass_type->price }} f cfa
                 </div>
-                <div class="flex items-center justify-center">
+                <div class="flex items-center justify-evenly">
                 <button  wire:click="buyPass" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                     Payer
                 </button>
+                @if ($pass)
+                    <button  wire:click="prolongePass" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                        Prolonger
+                    </button>
+                @endif
                 </div>
             </div>
         </div>
