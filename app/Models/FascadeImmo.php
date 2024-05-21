@@ -65,6 +65,75 @@ class FascadeImmo extends Model
     {
         return $this->hasMany(Place::class, 'facade_id')->count();
     }
+    public function countRentPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('offer_type' , 'rent')->count();
+    }
+    public function countSellPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('offer_type' , 'sell')->count();
+    }
+    public function countAppartementPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Appartement::class)->count();
+    }
+    public function countBureauPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Bureau::class)->count();
+    }
+    public function countChambrePlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Chambre::class)->count();
+    }
+    public function countCoworkingPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Coworking::class)->count();
+    }
+    public function countEntrepotPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Entrepot::class)->count();
+    }
+    public function countHotelPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Hotel::class)->count();
+    }
+    public function countImmeublePlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Immeuble::class)->count();
+    }
+    public function countMagasinPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Magasin::class)->count();
+    }
+    public function countResidencePlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Residence::class)->count();
+    }
+    public function countStudioPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Studio::class)->count();
+    }
+    public function countTerrainPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Terrain::class)->count();
+    }
+    public function countVillaPlaces(): int
+    {
+        return $this->hasMany(Place::class, 'facade_id')->where('placeable_type' , Villa::class)->count();
+    }
+
+    public function countLogement():int
+    {
+        return $this->countAppartementPlaces() + $this->countChambrePlaces() + $this->countHotelPlaces() + $this->countResidencePlaces() + $this->countStudioPlaces() + $this->countVillaPlaces();
+    }
+    public function countWork():int
+    {
+        return $this->countBureauPlaces() + $this->countCoworkingPlaces() + $this->countImmeublePlaces();
+    }
+    public function countComercial():int
+    {
+        return $this->countEntrepotPlaces() + $this->countMagasinPlaces();
+    }
     
 
     public function countFreeViews(): int

@@ -16,7 +16,7 @@ return new class extends Migration
 
             
             
-            $table->uuidMorphs('appartementable');
+            $table->nullableUuidMorphs('appartementable');
 
             $table->timestamps();
         });

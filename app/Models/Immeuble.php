@@ -82,4 +82,18 @@ class Immeuble extends Model
     {
         return $this->morphOne(Comodities::class, 'comoditiesable');
     }
+    public function entrepots(): MorphMany
+    {
+        return $this->morphMany(Entrepot::class, 'entrepotable');
+    }
+    
+    public function coworkings(): MorphMany
+    {
+        return $this->morphMany(Coworking::class, 'coworkingable');
+    }
+    
+    public function Magasins(): MorphMany
+    {
+        return $this->morphMany(Magasin::class, 'magasinable');
+    }
 }

@@ -43,7 +43,9 @@ Route::group(
         Route::group(['prefix' => 'places',], function(){
             Route::get('/', [PlaceController::class, 'index'])->name('catalogue.places.index');
             Route::get('create', [PlaceController::class, 'create'])->name('catalogue.places.create');
-            Route::get('edit', [PlaceController::class, 'edit'])->name('catalogue.places.edit');
+            Route::get('edit/{house_id}', [PlaceController::class, 'edit'])->name('catalogue.places.edit');
+            Route::get('show/{house_id}', [PlaceController::class, 'show'])->name('catalogue.places.show');
+            Route::get('delete/{house_id}', [PlaceController::class, 'delete'])->name('catalogue.places.delete');
 
         });
         Route::group(['prefix' => 'finances',], function(){
@@ -69,11 +71,10 @@ Route::group(
         'prefix' => 'visite',
     ],
     function(){
-        Route::get('dashboard', [FascadeImmoController::class, 'dashboard'])->name('catalogue.dashboard');
+        Route::get('dashboard', [FascadeImmoController::class, 'dashboard'])->name('visite.dashboard');
         Route::group(['prefix' => 'places',], function(){
-            Route::get('/', [PlaceController::class, 'index'])->name('catalogue.places.index');
-            Route::get('create', [PlaceController::class, 'create'])->name('catalogue.places.create');
-            Route::get('edit', [PlaceController::class, 'edit'])->name('catalogue.places.edit');
+            Route::get('/', [PlaceController::class, 'index'])->name('visite.places.index');
+            Route::get('show/{house_id}', [PlaceController::class, 'edit'])->name('visite.places.show');
 
         });
         Route::group(['prefix' => 'pass',], function(){

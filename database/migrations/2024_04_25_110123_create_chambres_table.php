@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique()->index();
 
 
-            $table->uuidMorphs('chambreable');
+            $table->nullableUuidMorphs('chambreable');
 
             $table->timestamps();
         });

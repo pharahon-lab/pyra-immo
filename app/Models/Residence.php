@@ -58,6 +58,15 @@ class Residence extends Model
         return $this->morphMany(Chambre::class, 'chambreable');
     }
     
+    public function coworkings(): MorphMany
+    {
+        return $this->morphMany(Coworking::class, 'coworkingable');
+    }
+    
+    public function Magasins(): MorphMany
+    {
+        return $this->morphMany(Magasin::class, 'magasinable');
+    }
     
     
     public function papers(): MorphOne

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('coworkings', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->index();
 
+            $table->nullableUuidMorphs('coworkingable');
             $table->timestamps();
         });
     }

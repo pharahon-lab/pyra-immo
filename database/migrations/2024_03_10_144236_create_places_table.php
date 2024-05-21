@@ -16,8 +16,18 @@ return new class extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
 
-            $table->enum('offer_type', ['sell', 'rent']);
-            $table->enum('rent_period', ['hourly', 'daily', 'weekly', 'mounthly', 'yearly'])->nullable();
+            $table->enum('offer_type', [
+                'none', 
+                'sell', 
+                'rent'
+            ]);
+            $table->enum('rent_period', [
+                'hour', 
+                'day', 
+                'week', 
+                'mounth',
+                'year'
+                ])->nullable();
             $table->string('price');
             $table->string('proprio_name')->nullable();
             $table->string('proprio_telephone')->nullable();

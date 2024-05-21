@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('piscine_is_interne')->nullable()->default(false);
             $table->boolean('securite')->nullable()->default(false);
             $table->boolean('parking')->nullable()->default(false);
-            $table->integer('place_parking')->nullable();
+            $table->integer('place_parking')->nullable()->default(0);
             $table->boolean('jardin')->nullable()->default(false);
             $table->boolean('cours_avant')->nullable()->default(false);
             $table->boolean('cours_arriere')->nullable()->default(false);

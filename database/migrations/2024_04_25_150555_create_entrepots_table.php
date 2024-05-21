@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('entrepots', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->index();
 
+            $table->nullableUuidMorphs('entrepotable');
             $table->timestamps();
         });
     }

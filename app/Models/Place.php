@@ -50,4 +50,10 @@ class Place extends Model
         return $this->morphTo();
     }
 
+    
+    public function commune(): BelongsTo
+    {
+        return $this->belongsTo(Communes::class);
+    }
+
 }

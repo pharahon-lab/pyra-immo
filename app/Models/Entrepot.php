@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
 
 class Entrepot extends Model
@@ -42,6 +43,11 @@ class Entrepot extends Model
         return $this->morphOne(Place::class, 'placeable');
     }
     
+    
+    public function entrepotable(): MorphTo
+    {
+        return $this->morphTo();
+    }
     
     public function papers(): MorphOne
     {

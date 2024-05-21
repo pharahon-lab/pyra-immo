@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
 
 class Coworking extends Model
@@ -40,6 +41,13 @@ class Coworking extends Model
     public function place(): MorphOne
     {
         return $this->morphOne(Place::class, 'placeable');
+    }
+
+    
+    
+    public function coworkingable(): MorphTo
+    {
+        return $this->morphTo();
     }
 
     

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('studios', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->index();
             
-            $table->uuidMorphs('studioable');
+            $table->nullableUuidMorphs('studioable');
 
             $table->timestamps();
         });

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Livewire;
-
 use App\Enum\PlaceOfferTypeEnum;
 use App\Enum\PlaceTypeEnum;
 use App\Livewire\Forms\ComoditiesForm;
@@ -30,11 +29,14 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-class CreatePlace extends Component
-{
 
+
+class EditPlace extends Component
+{
+    
     use WithFileUploads;
     
+    public Place $place;
     public ?PlaceForm $placeForm; 
     public ?InteriorForm $interiorForm; 
     public ?ExteriorForm $exteriorForm; 
@@ -46,6 +48,8 @@ class CreatePlace extends Component
 
     #[Validate(['videos.*' => 'mimetypes:video/avi,video/mp4, extensions:avi,mp4'])]
     public array $videos = [];
+    public $pics ;
+    public $vids;
     public $videoSelectedIndex = 0;
 
     public $placeTypes;
@@ -55,7 +59,7 @@ class CreatePlace extends Component
     public $has_master_house = false ;
     public $master_house_id;
     public $is_image_selected = true ;
-
+    public $path = 'https://pyra-immo-bucket-1.s3.eu-west-1.amazonaws.com/';
     public $placeOfferTypes;
     public $placeOffer ;
     public $not_living = [Terrain::class, Entrepot::class, Magasin::class];
@@ -65,19 +69,27 @@ class CreatePlace extends Component
     public $conf = [Coworking::class, Hotel::class, Residence::class, Immeuble::class];
 
 
-    public function mount()
+
+    
+
+    public function mount($place)
     {
-        $this->place_type = Appartement::class;
+        $this->place = $place;
+        $this->placeForm->fill($place);
+        $this->place_type = $place->placeable_type;
+
         $fas = User::find(Auth::id())->fascadeImmo;
         $ab = $fas->latestAbonnement->abonnement_type;
+
         for ($i=0; $i < $ab->max_image; $i++) { 
             $this->photos[$i] = null;
         }
         for ($i=0; $i < $ab->max_video; $i++) { 
             $this->videos[$i] = null;
         }
-        $this->placeForm->offer_type = PlaceOfferTypeEnum::Occune;
-        $this->placeForm->commune_id = 1;
+        $this->pics =  ImmoImages::where('place_id', $place->id)->get()->toArray();
+        $this->vids =  ImmoVideo::where('place_id', $place->id)->get()->toArray();
+
         
     }
 
@@ -151,9 +163,11 @@ class CreatePlace extends Component
     }
 
 
+
+
+
     public function render()
     {
-        return view('livewire.create-place');
+        return view('livewire.edit-place');
     }
-
 }

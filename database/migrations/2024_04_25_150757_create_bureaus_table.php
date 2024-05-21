@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('bureaus', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique()->index();
 
-            $table->uuidMorphs('bureauable');
+            $table->nullableUuidMorphs('bureauable');
 
             $table->timestamps();
         });

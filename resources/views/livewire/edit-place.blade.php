@@ -11,7 +11,7 @@
 
         <div class="flex justify-between gradient">
             <div class="px-8 py-4 text-white text-2xl font-semibold capitalize content-center">
-                <h3>Nouvelle Propriétée</h3>
+                <h3>Modifier Propriétée</h3>
             </div>
             <div class="flex justify-end px-8 py-4">
                 
@@ -80,6 +80,7 @@
                             </div>
                         @else
                             <div class="h-max w-max">
+                                <img class="object-fill max-h-96" src="{{ $path.$place->photo_couverture }}">
                             </div>
                         @endif
                         
@@ -105,9 +106,14 @@
                             @if ($photo != '') 
                                     <img class="object-fill max-h-28" src="{{ $photos[$loop->index]->temporaryUrl() }}">
                             @else
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <p class="mb-2 text-4xl text-black "><span class="font-semibold">+</span></p>
-                                </div>
+                                @if (!empty($pics[$loop->index]))
+                                    <img class="object-fill max-h-28" src="{{ $path.($pics[$loop->index]['url']) }}">
+                                @else
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <p class="mb-2 text-4xl text-black "><span class="font-semibold">+</span></p>
+                                    </div>
+                                @endif
+                                
                             @endif
 
                         </button>
