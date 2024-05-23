@@ -55,5 +55,13 @@ class Place extends Model
     {
         return $this->belongsTo(Communes::class);
     }
+    public function freeViews(): BelongsTo
+    {
+        return $this->belongsTo(FreeViews::class);
+    }
+    public function isfreeViews(): bool
+    {
+        return $this->freeViews()->whereDate("end_date", '>', today())->count() > 0;
+    }
 
 }

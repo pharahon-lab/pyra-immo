@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ImmoImages;
+use App\Models\ImmoVideo;
 use App\Models\Place;
 use Illuminate\Http\Request;
 
@@ -23,6 +25,7 @@ class PlaceController extends Controller
     }
     
     public function show($house_id){
+        /// get the place object
         $place = Place::findOrFail($house_id);
         return view('catalogue.places.show', ['place' => $place]);
     }
