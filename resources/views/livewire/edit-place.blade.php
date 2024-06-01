@@ -65,36 +65,44 @@
 
 
         <div  class="h-max">
-
-            <div class="flex justify-center my-4 font-semibold text-xl text-orange-700">
-                <h1>Photo</h1>
-            </div>
-            <div class="w-full h-1/2">
-                <div class="w-full flex justify-center h-96 max-h-96 bg-gray-300">
+            <div class="w-full aspect-video">
+                <div class="w-full relative aspect-video flex items-center justify-center bg-gray-300">
                     @if ($is_image_selected)
 
                         
-                        @if ($photos[$photoSelectedIndex]) 
-                            <div class="">
-                                <img class="object-fill max-h-96" src="{{ $photos[$photoSelectedIndex]->temporaryUrl() }}">
-                            </div>
+                        @if ($pics[$photoSelectedIndex]) 
+                                <img class="object-contain" src="{{ $path.$pics[$photoSelectedIndex]['url'] }}">
                         @else
-                            <div class="h-max w-max">
-                                <img class="object-fill max-h-96" src="{{ $path.$place->photo_couverture }}">
-                            </div>
+                                <img class="object-contain" src="{{ $path.$place->photo_couverture }}">
                         @endif
                         
+                        
+                        <button type="button" x-on:click="$wire.selectPhoto({{ ($photoSelectedIndex-1) }})" class="absolute left-0 bottom-0 size-12 bg-white self-start rounded-full flex m-8 shadow-lg">
+                            <x-heroicons::solid.chevron-left class=" m-auto size-12 text-orange-600"/>
+                        </button>
+                        <button type="button" x-on:click="$wire.selectPhoto({{ ($photoSelectedIndex+1) }})" class="absolute bottom-0 right-0 size-12 bg-white self-start rounded-full flex m-8 shadow-lg">
+                            <x-heroicons::solid.chevron-right class=" m-auto size-12 text-orange-600"/>
+                        </button>
+
                     @else
                         
                         @if ($videos[$videoSelectedIndex]) 
-                            <div class="">
-                                <video class="object-fill max-h-96" src="{{ $videos[$videoSelectedIndex]->temporaryUrl() }}">
-                            </div>
+                                <video class="object-contain" src="{{ $videos[$videoSelectedIndex]->temporaryUrl() }}">
                         @else
-                            <div class="h-max w-max">
+                            <div class="w-max aspect-video">
                                 
                             </div>
                         @endif
+
+
+                        
+                        <button type="button" x-on:click="$wire.selectVideo({{ ($videoSelectedIndex-1) }})" class="absolute left-0 bottom-0 size-12 bg-white self-start rounded-full flex m-8 shadow-lg">
+                            <x-heroicons::solid.chevron-left class=" m-auto size-12 text-orange-600"/>
+                        </button>
+                        <button type="button" x-on:click="$wire.selectVideo({{ ($videoSelectedIndex +1) }})" class="absolute bottom-0 right-0 size-12 bg-white self-start rounded-full flex m-8 shadow-lg">
+                            <x-heroicons::solid.chevron-right class=" m-auto size-12 text-orange-600"/>
+                        </button>
+
                     @endif
                 </div> 
             </div>

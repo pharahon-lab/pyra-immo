@@ -85,3 +85,41 @@ Route::group(
 
         });
     });
+    
+Route::group(
+    [
+        'prefix' => 'showroom',
+    ],
+    function(){
+
+        // showroom group
+        Route::group(['prefix' => 'showroom',], function(){
+            Route::get('/', [HomeController::class, 'showroom'])->name('showroom.index');
+            Route::get('show/{place_id}', [HomeController::class, 'showroom_show'])->name('showroom.show');
+            Route::get('category/{category}', [HomeController::class, 'showroom_category'])->name('showroom.category');
+        });
+
+
+        // freeview showroom
+
+        // search group
+        Route::group(['prefix' => 'search',], function(){
+            Route::get('/', [HomeController::class, 'search_index'])->name('showroom.search.index');
+            Route::post('/', [HomeController::class, 'search'])->name('showroom.search');
+        });
+
+
+        
+        // Route::group(['prefix' => 'places',], function(){
+        //     Route::get('/', [PlaceController::class, 'index'])->name('visite.places.index');
+        //     Route::get('show/{house_id}', [PlaceController::class, 'edit'])->name('visite.places.show');
+
+        // });
+        // Route::group(['prefix' => 'pass',], function(){
+        //     Route::get('/', [PassController::class, 'index'])->name('home.pass.index');
+        //     Route::get('payer/{pass_type}', [PassController::class, 'payer'])->name('home.pass.payer');
+        //     Route::get('payement/{pass_id}', [PassController::class, 'payement'])->name('home.pass.payement');
+            
+
+        // });
+    });

@@ -10,9 +10,9 @@ use App\Models\ImmoVideo;
 use App\Models\Place;
 use Livewire\Component;
 
-class ShowPlace extends Component
+class ShowPlaceCustomer extends Component
 {
-
+    
     public Place $place;
     public $photos ;
     public $videos;
@@ -70,7 +70,6 @@ class ShowPlace extends Component
     
     public function render()
     {
-        return view('livewire.show-place');
+        return view('livewire.show-place-customer');
     }
-
 }
