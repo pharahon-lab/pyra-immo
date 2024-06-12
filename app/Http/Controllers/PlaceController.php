@@ -36,4 +36,21 @@ class PlaceController extends Controller
         return redirect('catalogue.places.index');
     }
 
+    
+    public function validateMaison($id)
+    {
+        $data = Place::findOrFail($id);
+        $data->is_validated = 1;
+        $data->save();
+        return redirect()->back()->with('success','Maison validée avec succès');
+    }
+
+    public function makeOcccupe($id)
+    {
+        $data = Place::findOrFail($id);
+        $data->is_occupe = 1;
+        $data->save();
+        return redirect()->back()->with('success','Le statut de la maison est désormais occupée');
+    }
+
 }

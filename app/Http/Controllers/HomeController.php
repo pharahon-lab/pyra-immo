@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\AbonnementType;
+use App\Models\FascadeImmo;
 use App\Models\PassType;
 use App\Models\Place;
+use App\Models\Team;
+use App\Models\User;
+use App\Services\AbonnementServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Laravel\Socialite\Facades\Socialite;
 
 class HomeController extends Controller
 {
@@ -43,7 +50,5 @@ class HomeController extends Controller
         
         return view('search.index');
     }
-
     
-
 }

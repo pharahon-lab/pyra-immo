@@ -1,7 +1,7 @@
-<x-guest-layout>
+<x-customer-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
+        <x-slot name="logo" style="background: #ff7f27">
+            <img class="mx-2" src="{{ asset('images/logo.png') }}" alt="" srcset="" style="height: 8rem"> 
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -19,7 +19,7 @@
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
-            <div class="block">
+            <div class="w-full">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             </div>
@@ -30,5 +30,7 @@
                 </x-button>
             </div>
         </form>
+        <x-slot name="socials">
+        </x-slot>
     </x-authentication-card>
-</x-guest-layout>
+</x-customer-layout>

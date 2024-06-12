@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbonnementController;
+use App\Http\Controllers\AuthApiController;
 use App\Http\Controllers\FascadeImmoController;
 use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\HomeController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\PassController;
 use App\Http\Controllers\PlaceController;
 use Doctrine\DBAL\Schema\Index;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('auth/redirect/{provider}', [AuthApiController::class, 'auth_redirect'])->name('auth.social');
 
 
 Route::group(

@@ -3,12 +3,14 @@
   
   @php
     $placeTypes = App\Enum\PlaceTypeEnum::cases();
+    $placeOfferTypes = App\Enum\PlaceOfferTypeEnum::cases();
+    $placeRentPeriodTypes = App\Enum\PlaceRentPeriodEnum::cases();
     $commumes = App\Models\Communes::all();
   @endphp
     
       <!--Hero-->
       <div class="pt-24">
-        <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+        <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row">
           <!--Left Col-->
           <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
             <p class="uppercase tracking-loose w-full">Pyra Immo</p>
@@ -23,106 +25,68 @@
             </a>
           </div>
           <!--Recherche-->
-          <div class="w-full md:w-3/5 py-6 text-center">
+          <div class="flex flex-col w-full md:w-3/5 h-full justify-between items-end text-right md:text-right">
 
             <form action='{{ route('showroom.search') }}'>
               @csrf 
               {{-- Achat / Location --}}
-              <div class="flex justify-end my-4">
-                <div class="mx-5">
-                  <div class="m-2">
-                  <label class="text-lg text-white" for="transaction"> Achat / Location</label>
-                  </div>
-                  <select class="rounded-full text-black" name="transaction" id="transaction">
-                    <option value="tous">
-                      <div class="flex justify-left text-black">
-                          <span  class="">Tout</span>
-                      </div>
-                    </option>
-                    <option value="achat">
-                      <div class="flex justify-left text-black">
-                          <span  class="">Achat</span>
-                      </div>
-                    </option>
-                    <option value="location">
-                      <div class="flex justify-left text-black">
-                          <span  class="">Location</span>
-                      </div>
-                    </option>
-                  </select>
-                </div>  
-              </div>
 
-              <div class="mx-auto flex flex-wrap flex-col md:flex-row justify-end my-4">
-                {{-- Commune --}}
-                <div class="mx-5">
-                  <div class="m-2">
-                    <label class="text-lg text-white" for="commune"> Commune / Quartier</label>
+                <div class="flex justify-end px-8 py-4">
+                  
+                  <div class="flex-col">
+                      <div class="m-2 text-white text-base text-center font-semibold">
+                          <label for="place_type">Type de prorpiétée</label>
+                      </div>
+                      <select class="shadow-md text-black rounded-l-full" id="place_type" name="place_type" >
+                          <option value="*">
+                          <div class="flex justify-left text-black">
+                              <span  class="">Toutes</span>
+                          </div>
+                          @foreach ($placeTypes as $placeType)
+                              <option value="{{ $placeType->value }}">{{ $placeType->name }}</option>
+                              
+                          @endforeach
+                      </select>
                   </div>
-                  <div>
-                    <select class="rounded-full text-black" name="commune" id="commune">
-                      
-                      <option value="toutes">
-                        <div class="flex justify-left text-black">
-                            <span  class="">Toutes les communes</span>
-                        </div>
-                        
-                      </option>
 
-                      @foreach ($commumes as $commune)
-                          <option value="{{$commune->id}}">
-                            <div class="flex justify-left text-black">
-                                <img class="px-2" src="{{ asset('flags/'.$commune->city->country->country_code.'.png') }}" style="height: 1rem">
-                                <span  class="">{{  $commune->name  }} ({{  $commune->city->name  }} {{  $commune->city->country->country_code  }})</span>
-                            </div>
-                            
-                          </option>
-                      @endforeach
-                    </select>
+                  <div class="flex-col">
+                      <div class="m-2 text-white text-base text-center font-semibold">
+                          <label for="place_offer">Offre</label>
+                      </div>
+                      <select  class="shadow-md text-black" id="place_offer" >
+                          @foreach ($placeOfferTypes as $placeOffer)
+                              <option value="{{ $placeOffer->value }}">{{ $placeOffer->name }}</option>
+                              
+                          @endforeach
+                      </select>
+                          
                   </div>
-                </div>
 
-                {{-- Type Proprietée--}}
-                <div class="mx-5">
-                  <div class="m-2">
-                    <label class="text-lg text-white" for="propriete"> Type de propriétée</label>
+                  {{-- Commune --}}
+                  <div class="flex-col">
+                      <div class="m-2 text-white text-base text-center font-semibold">
+                          <label for="commune"> Commune / Quartier</label>
+                      </div>
+                      <div>
+                          <select class="text-black shadow-md rounded-r-full" name="commune" id="commune">
+                            <option value="*">
+                              <div class="flex justify-left text-black">
+                                  <span  class="">Toutes les communes</span>
+                              </div>
+                              
+                            </option>
+                          @foreach ($commumes as $commune)
+                              <option value="{{$commune->id}}">
+                                  <div class="flex justify-left text-black">
+                                      <img class="px-2" src="{{ asset('flags/'.$commune->city->country->country_code.'.png') }}" style="height: 1rem">
+                                      <span  class="">{{  $commune->name  }} ({{  $commune->city->name  }} {{  $commune->city->country->country_code  }})</span>
+                                  </div>
+                                  
+                              </option>
+                          @endforeach
+                          </select>
+                      </div>
                   </div>
-                  <div>
-                    <select class="rounded-full text-black" name="propriete" id="propriete">
-                      
-                      <option value="tous">
-                        <div class="flex justify-left text-black">
-                            <span  class="">Tout types</span>
-                        </div>
-                      </option>
-                      <option value="bureau">
-                        <div class="flex justify-left text-black">
-                            <span  class="">Bureau</span>
-                        </div>
-                      </option>
-                      <option value="logement">
-                        <div class="flex justify-left text-black">
-                            <span  class="">Logement</span>
-                        </div>
-                      </option>
-                      <option value="magasin">
-                        <div class="flex justify-left text-black">
-                            <span  class="">Magasin</span>
-                        </div>
-                      </option>
-                      <option value="terrain">
-                        <div class="flex justify-left text-black">
-                            <span  class="">Terrain nu</span>
-                        </div>
-                      </option>
-                      <option value="passage">
-                        <div class="flex justify-left text-black">
-                            <span  class="">Hotel/residence</span>
-                        </div>
-                      </option>
-                    </select>
-                  </div>
-                </div>
               </div>
 
                 <div class="flex justify-end px-4">
@@ -136,44 +100,47 @@
         </div>
       </div>
 
-      <div class=" my-16 py-4 mx-auto px-16 sm:px-24 lg:px-48">
+      <section class="bg-white border-b py-8">
+        <div class=" my-16 py-4 mx-auto px-16 sm:px-24 lg:px-48">
 
-          <!-- Carousel Body -->
-        <div class="relative rounded-lg block md:flex items-center bg-gray-100 shadow-xl" style="min-height: 19rem;">
-          <div class="relative w-full md:w-2/5 h-full overflow-hidden rounded-t-lg md:rounded-t-none md:rounded-l-lg" style="min-height: 19rem;">
-            <img class="absolute inset-0 w-full h-full object-cover object-center" src="https://stripe.com/img/v3/payments/overview/photos/missguided.jpg" alt="">
-            <div class="absolute inset-0 w-full h-full bg-orange-600 opacity-75"></div>
-            
-          </div>
-          <div class="w-full md:w-3/5 h-full flex items-center bg-gray-100 rounded-lg">
-            <div class="p-12 md:pr-24 md:pl-16 md:py-12">
-              <p class="absolute top-0 right-0 text-orange-700 m-6 text-lg font-semibold"> Prix F CFA</p>
-              <p class="top-0 right-0 text-orange-700 text-lg py-1 font-semibold"> Type</p>
-              <p class="top-0 right-0 text-orange-700 text-lg py-1 font-semibold"> commune</p>
-              <p class="top-0 right-0 text-orange-700 text-lg py-1 font-semibold"> pièces/salle d'eau</p>
-              <p class="top-0 right-0 text-orange-700 text-lg py-1 font-semibold"> Offre</p>
+            <!-- Carousel Body -->
+          <div class="relative rounded-lg block md:flex items-center bg-gray-100 shadow-xl" style="min-height: 19rem;">
+            <div class="relative w-full md:w-2/5 h-full overflow-hidden rounded-t-lg md:rounded-t-none md:rounded-l-lg" style="min-height: 19rem;">
+              <img class="absolute inset-0 w-full h-full object-cover object-center" src="https://stripe.com/img/v3/payments/overview/photos/missguided.jpg" alt="">
+              <div class="absolute inset-0 w-full h-full bg-orange-600 opacity-75"></div>
               
             </div>
-            <svg class="hidden md:block absolute inset-y-0 h-full w-24 fill-current text-gray-100 -ml-12" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <polygon points="50,0 100,0 50,100 0,100" />
-            </svg>
+            <div class="w-full md:w-3/5 h-full flex items-center bg-gray-100 rounded-lg">
+              <div class="p-12 md:pr-24 md:pl-16 md:py-12">
+                <p class="absolute top-0 right-0 text-orange-700 m-6 text-lg font-semibold"> Prix F CFA</p>
+                <p class="top-0 right-0 text-orange-700 text-lg py-1 font-semibold"> Type</p>
+                <p class="top-0 right-0 text-orange-700 text-lg py-1 font-semibold"> commune</p>
+                <p class="top-0 right-0 text-orange-700 text-lg py-1 font-semibold"> pièces/salle d'eau</p>
+                <p class="top-0 right-0 text-orange-700 text-lg py-1 font-semibold"> Offre</p>
+                
+              </div>
+              <svg class="hidden md:block absolute inset-y-0 h-full w-24 fill-current text-gray-100 -ml-12" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <polygon points="50,0 100,0 50,100 0,100" />
+              </svg>
+            </div>
+            <button class="absolute top-0 mt-32 left-0 bg-white rounded-full shadow-md h-12 w-12 text-2xl text-orange-600 hover:text-orange-400 focus:text-orange-400 -ml-6 focus:outline-none focus:shadow-outline">
+              <span class="block" style="transform: scale(-1);">&#x279c;</span>
+            </button>
+            <button class="absolute top-0 mt-32 right-0 bg-white rounded-full shadow-md h-12 w-12 text-2xl text-orange-600 hover:text-orange-400 focus:text-orange-400 -mr-6 focus:outline-none focus:shadow-outline">
+              <span class="block" style="transform: scale(1);">&#x279c;</span>
+            </button>
           </div>
-          <button class="absolute top-0 mt-32 left-0 bg-white rounded-full shadow-md h-12 w-12 text-2xl text-orange-600 hover:text-orange-400 focus:text-orange-400 -ml-6 focus:outline-none focus:shadow-outline">
-            <span class="block" style="transform: scale(-1);">&#x279c;</span>
-          </button>
-          <button class="absolute top-0 mt-32 right-0 bg-white rounded-full shadow-md h-12 w-12 text-2xl text-orange-600 hover:text-orange-400 focus:text-orange-400 -mr-6 focus:outline-none focus:shadow-outline">
-            <span class="block" style="transform: scale(1);">&#x279c;</span>
-          </button>
-        </div>
-        
-        <!-- Carousel Tabs -->
-        <div class="flex items-center py-5 justify-between">
-            @foreach ($placeTypes as $placeType)
-              <button class="px-2 opacity-80 hover:opacity-100 focus:opacity-100 text-black text-lg font-semibold hover:text-orange-600 focus:text-orange-600 bg-white rounded-xl"> <p class="">{{ $placeType->name }}</p> </button>             
-            @endforeach
-        </div>      
+          
+          <!-- Carousel Tabs -->
+          <div class="flex items-center py-5 justify-between">
+              @foreach ($placeTypes as $placeType)
+                <button class="px-2 opacity-80 hover:opacity-100 focus:opacity-100 text-black text-lg font-semibold hover:text-orange-600 focus:text-orange-600 bg-white rounded-xl"> <p class="">{{ $placeType->name }}</p> </button>             
+              @endforeach
+          </div>      
 
-      </div>
+        </div>
+      </section>
+        
     
 
       {{-- PRESENTATION DE LA PLATEFORME --}}

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->boolean('is_admin')->nullable()->default(false);
             $table->boolean('is_staff')->nullable()->default(false);
             $table->boolean('is_suspended')->nullable()->default(false);
@@ -28,6 +28,9 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->foreignUuid('fascade_immo_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('provider')->nullable();
+            $table->string('provider_token')->nullable();
+            $table->string('provider_refresh_token')->nullable();
             $table->timestamps();
         });
     }

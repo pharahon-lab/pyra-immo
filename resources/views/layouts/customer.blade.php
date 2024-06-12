@@ -10,7 +10,7 @@
         
         <x-ui.alert/>
 
-        <div class="leading-normal tracking-normal text-white gradient font-sans text-gray-900 antialiased">
+        <div class="leading-normal tracking-normal text-white gradient font-sans text-gray-900 antialiased mt-16">
             <div class="h-full">
                 {{ $slot }}
             </div>

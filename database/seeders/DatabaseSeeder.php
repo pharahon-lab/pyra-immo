@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
           ];
         $citci = [
             'Abidjan',
-            'Gran Bassam',
+            'Grand-Bassam',
           ];
 
         $comm_abj = [
@@ -53,6 +53,22 @@ class DatabaseSeeder extends Seeder
             'Songon',
             'Yopougon',
           ];
+          $comm_bassam = [
+              'Mossou',
+              'Mockeyville',
+            ];
+            $comm_ouaga = [
+                'Ouaga 200',
+                'Pissy',
+                'Dassasgo',
+                'Somgandé',
+                'Saaba',
+                'Zone du bois',
+              ];
+              $comm_bobo = [
+                  'Bolmakote',
+                  'Belle-ville',
+                ];
 
         
         $abbType = [
@@ -207,8 +223,20 @@ class DatabaseSeeder extends Seeder
             'phone_digit_number' => 8,
         ])->create();
 
-        Communes::factory()->count(13)->sequence(
+        Communes::factory()->count(sizeof($comm_abj))->sequence(
             fn (Sequence $sequence) => ['name' => $comm_abj[$sequence->index], 'city_id' => 1]
+        )->create();
+        
+        Communes::factory()->count(sizeof($comm_bassam))->sequence(
+            fn (Sequence $sequence) => ['name' => $comm_bassam[$sequence->index], 'city_id' => 2]
+        )->create();
+        
+        Communes::factory()->count(sizeof($comm_ouaga))->sequence(
+            fn (Sequence $sequence) => ['name' => $comm_ouaga[$sequence->index], 'city_id' => 3]
+        )->create();
+        
+        Communes::factory()->count(sizeof($comm_bobo))->sequence(
+            fn (Sequence $sequence) => ['name' => $comm_bobo[$sequence->index], 'city_id' => 4]
         )->create();
 
         AbonnementType::factory()->count(6)->sequence(

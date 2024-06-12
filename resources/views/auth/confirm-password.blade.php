@@ -1,7 +1,7 @@
-<x-guest-layout>
+<x-customer-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
+        <x-slot name="logo" style="background: #ff7f27">
+            <img class="mx-2" src="{{ asset('images/logo.png') }}" alt="" srcset="" style="height: 8rem"> 
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -24,5 +24,7 @@
                 </x-button>
             </div>
         </form>
+        <x-slot name="socials">
+        </x-slot>
     </x-authentication-card>
-</x-guest-layout>
+</x-customer-layout>
