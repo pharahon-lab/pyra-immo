@@ -35,11 +35,10 @@ class PassServices{
     }
 
     /// create prolonge pass
-    public function prolonge_pass(PassType $pass_type, Transactions $transaction){
+    public function prolonge_pass($pass_id, PassType $pass_type, Transactions $transaction){
 
-        /// 1. get the pass from session,
-        $pass_id = session('pass_id');
-        $pass = Pass::where('id', $pass_id)->first();
+        /// 1. get the pass ,
+        $pass = Pass::where('id', $pass_id)->with(['pass_type', 'transaction'])->first();
         /// 2. get the transaction and pass type, set the start day
         /// 3. update old pass according to the pass type
         $pass->end_date = date('Y-m-d', strtotime('+ 1 week', date_create($pass->end_date)->getTimestamp()));
@@ -68,23 +67,27 @@ class PassServices{
         $pass = Pass::create([
             'code' => substr($uniqid, 12, 20),
             'end_date' => date('Y-m-d', strtotime('+ 1 week', $start->toDate()->getTimestamp())),
-            'nb_visite' => 10,
+            'nb_visite' => 20,
             'transaction_number' => '0',
             'transaction_id' => 1,
-            'pass_type_id' => 3,
+            'pass_type_id' => 2,
         ]);
         return $pass;
     }
 
     /// house visited (-1 visite on the pass)
-    public function house_visited(Place $place){
+    public function house_visited(int $pass_id, Place $place){
         /// 1. get the pass 
-        $pass = Session('pass');
+        $pass = Pass::where('id', $pass_id)->with(['pass_type', 'transaction'])->first();
 
         /// 2. get the house 
         /// 3. decrement pass visites 
-        $pass->nb_visites = $pass->nb_visites - 1;
-        $pass->save();
+        if (!$place->isfreeViews) {
+                
+            $pass->nb_visites = $pass->nb_visites - 1;
+            $pass->save();
+        }
+
         /// 4. increment house views
         $place->views++;
         $place->save();
@@ -96,6 +99,7 @@ class PassServices{
                 'place_id'=>$place->id,
             ]
         );
+        return $pass;
     }
 
 }

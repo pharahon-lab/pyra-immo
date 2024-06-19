@@ -5,8 +5,11 @@ namespace App\Services;
 
 use App\Models\Abonnement;
 use App\Models\AbonnementType;
+use App\Models\Pass;
+use App\Models\Place;
 use App\Models\Transactions;
 use App\Models\User;
+use App\Models\VisitesDone;
 
 class AbonnementServices{
 
@@ -66,6 +69,31 @@ class AbonnementServices{
         return $abonnement;
     }
 
-    /// 
+    /// calculate abonnement return on visite
+    public function gotVisited($visite_done_id){
+        $visite_done = VisitesDone::find($visite_done_id);
+        $pass = $visite_done->pass;
+        $pass_type = $pass->pass_type;
+        $place = $visite_done->place;
+
+        $f_ab = AbonnementType::where('price', 0)->first();
+
+        $fascade = $place->fascadeImmo;
+        $abonnement = Abonnement::where('facade_id', $fascade->id)->whereNot('type_abonnement_id', $f_ab->id)->whereDate('end_date', '>=', $visite_done->created_at)->whereDate('start_date', '<=', $visite_done->created_at)
+        ->first();
+        if ($abonnement) {
+            $type = $abonnement->abonnement_type;
+    
+            // calculate user part
+            $p = (int)$pass_type->price;
+            $visitePrice = $p / $pass_type->nb_visite;
+            $dem_part = ($visitePrice/100) * $type->pourcentage_demarcheur;
+    
+            // update user data and save
+            $fascade->balance = floatval($fascade->balance) + $dem_part;
+            $fascade->save();
+        }
+
+    }
 
 }

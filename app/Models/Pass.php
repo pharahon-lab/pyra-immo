@@ -46,4 +46,8 @@ class Pass extends Model
     {
         return $this->belongsTo(Transactions::class);
     }
+    public function visiteEffectue()
+    {
+        return $this->belongsToMany(VisitesDone::class, 'place_id');
+    }
 }

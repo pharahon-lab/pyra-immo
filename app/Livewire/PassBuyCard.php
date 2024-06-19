@@ -38,7 +38,8 @@ class PassBuyCard extends Component
         
         $transaction = $transactionService->freeTrannsaction();
 
-        $pass = $passService->prolonge_pass($this->pass_type, $transaction);
+        $pass_id = session('pass_id');
+        $pass = $passService->prolonge_pass( $pass_id, $this->pass_type, $transaction);
         return redirect()->route('home.pass.payement', ['pass_id' => $pass->id]);
     }
 

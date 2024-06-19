@@ -212,10 +212,10 @@ class PlaceApiController extends Controller
 
     }
 
-    public function getMyPlaces(Request $request, $id)
+    public function getMyPlaces(Request $request)
     {
-        $a = Place::with('image')->where('user_id', '=',$id)->withCount('passvisites')->get();
-        return response()->json($a);
+        $user = $request->user();
+        return response()->json($user->fascadeImmo->places);
         }
 
 }

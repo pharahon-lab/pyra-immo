@@ -38,6 +38,7 @@ Route::get('/communes', [PlaceApiController::class, 'getAllCommunes']);
 Route::get('/pass_types', [PassApiController::class, 'getAllPassTypes']);
 Route::get('/abonnement_types', [AbonnementApiController::class, 'getAllTypeAbonnements']);
 Route::get('/immo_enums', [PlaceApiController::class, 'getAllEnums']);
+Route::get('/transactions/{type}/getnumber', [FinanceApiController::class, 'getTransactionNumber']);
 
 Route::group(
     [
@@ -46,7 +47,7 @@ Route::group(
     ],
     function(){
         Route::group(['prefix' => 'places',], function(){
-            Route::get('/', [PlaceApiController::class, 'index']);
+            Route::get('/', [PlaceApiController::class, 'getMyPlaces']);
             Route::get('create', [PlaceApiController::class, 'create']);
             Route::get('edit/{house_id}', [PlaceApiController::class, 'edit']);
             Route::get('show/{house_id}', [PlaceApiController::class, 'show']);
@@ -65,7 +66,8 @@ Route::group(
             Route::get('create', [AbonnementApiController::class, 'create']);
             Route::get('edit', [AbonnementApiController::class, 'edit']);
             Route::get('resume/{ab_type}', [AbonnementApiController::class, 'resume']);
-            Route::post('payement/{ab_type}', [AbonnementApiController::class, 'buyAbonnement']);
+            Route::post('payement', [AbonnementApiController::class, 'buyAbonnement']);
+            Route::get('promos/{ab_type}', [AbonnementApiController::class, 'getAbonnementPromos']);
             
 
         });
@@ -82,9 +84,12 @@ Route::group(
 
         });
         Route::group(['prefix' => 'pass',], function(){
-            Route::get('/', [PassApiController::class, 'index']);
-            Route::get('payer/{pass_type}', [PassApiController::class, 'payer']);
-            Route::get('payement/{pass_id}', [PassApiController::class, 'payement']);
+            Route::post('/', [PassApiController::class, 'verifPassVisite']);
+            Route::post('buy_pass', [PassApiController::class, 'buyPass']);
+            Route::post('prolonge_pass', [PassApiController::class, 'prolongePass']);
+            Route::post('pass_places', [PassApiController::class, 'getPassVisitePlaces']);
+            Route::post('visiting', [PassApiController::class, 'passTrigger']);
+            Route::get('promos/{pass_type}', [PassApiController::class, 'getPassPromos']);
             
 
         });

@@ -6,10 +6,14 @@ use App\Models\Abonnement;
 use App\Models\Pass;
 use App\Models\PassType;
 use App\Models\Place;
+use App\Models\Promotions;
 use App\Models\Transactions;
 use App\Models\User;
 use App\Models\VisitesDone;
+use App\Services\PassServices;
+use App\Services\TransactionServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PassApiController extends Controller
 {
@@ -18,6 +22,40 @@ class PassApiController extends Controller
         $datas = PassType::get();
         return response()->json($datas);
     }
+
+    public function getPassPromos($pass_type_id)
+    {
+        $datas = Promotions::where('promotionnable_type', PassType::class)
+        ->where('promotionnable_id', $pass_type_id)
+        ->whereDate('start', '<=', today())
+        ->whereDate('end', '>=', today())->get();
+        return response()->json($datas);
+    }
+
+
+    
+    public function buyPass(Request $request, PassServices $passService, TransactionServices $transactionService)
+    {
+        // $transaction = $transactionService->newTrannsaction($request->transaction);
+        $transaction = $transactionService->freeTrannsaction();
+        $pass_type = PassType::find($request->pass_type_id);
+
+        $pass = $passService->new_pass($pass_type, $transaction);
+        $res['pass_type'] = $pass_type;
+        $res['pass'] = $pass;
+        return response()->json($res);
+    }
+    
+    public function prolongePass(Request $request, PassServices $passService, TransactionServices $transactionService)
+    {
+        // $transaction = $transactionService->newTrannsaction($request->transaction);
+        $transaction = $transactionService->freeTrannsaction();
+        $pass_type = PassType::find($request->pass_type_id);
+        $pass_id = $request->pass_id;
+        $pass = $passService->prolonge_pass($pass_id, $pass_type, $transaction);
+        return response()->json($pass);
+    }
+    
     public function buyPassVisite(Request $request)
 
     {
@@ -256,8 +294,7 @@ class PassApiController extends Controller
 
     // one visite faite on décrémente de 1 le nombre de visites du pass
 
-    public function passM(Request $request)
-
+    public function passTrigger(Request $request, PassServices $passService,)
     {
 
         // l'utilisatuer quand il visite  une maison nous envoie le code du pass utilisé avec l'id de la maison visité
@@ -270,39 +307,37 @@ class PassApiController extends Controller
 
         // récupère le pass visite avec les maisons visité aux quelles il est lié dans la table "visites effectué"
 
-        $data = Pass::where('code',$code)->first();
+        $pass = Pass::where('code',$code)->first();
 
         $place = Place::where('id',$placeId)->first();
 
-        $demarcheur = User::where('id',$place->user_id)->first();
-
-        $type_visite = PassType::where('id',$data->pass_type_id)->first();
-
-        $abonnement = Abonnement::where('user_id',$place->user_id)->where('end_date', '>=', now())->first();
+        $fascade = $place->fascade;
 
 
+        if($pass == null){
+            return response()->json(["errors" => 'Code erronée'], 401);
+        }
 
-        if($data->is_expired){
 
-            return response()->json($data);
+        if($place == null){
+            return response()->json(["errors" => 'Erreur innatendue'], 401);
+        }
+
+        if($pass->is_expired){
+
+            return response()->json(["errors" => "Pass Expiré"], 401);
 
         }
 
-        if($data->nb_visite<=0)
-
+        if($pass->nb_visite<=0)
         {
+            $pass->is_expired = 1;
 
-            $data->is_expired = 1;
-
-            return response()->json($data);
+            return response()->json(["errors" => "Pass Expiré"], 401);
 
         }
 
-
-
-
-
-        $checkData = VisitesDone::where('pass_visite_id',$data->id)
+        $checkData = VisitesDone::where('pass_visite_id',$pass->id)
 
             ->where('place_id',$placeId)->first();
 
@@ -310,79 +345,15 @@ class PassApiController extends Controller
 
         // si l'id de la maison est dans la liste ne rien faire
 
-        if($checkData ==null)
+        if($checkData == null){   
 
-        {   
-
-            //  décrémenter le nombre de visites du pass et lier le pass a la maison dans la table visites effectué
-
-            $data->nb_visite = $data->nb_visite -1;
-
-            if($data->nb_visite==0)
-
-            {
-
-                $data->is_expired = 1;
-
-            }
-
-            else
-
-            {
-
-                $data->is_expired = 0;
-
-            }
-
-            $data->save();
-
-            //on enregistre les datas dans la table VisiteEffectue
-
-            VisitesDone::create(
-
-                [
-
-                    'pass_visite_id'=>$data->id,
-
-                    'place_id'=>$placeId,
-
-                ]
-
-            );
-
-
-
-            // if ($abonnement != null) {
-
-                
-
-            //     $type = TypeAbonnement::where('id',$abonnement->type_abonnement_id)->first();
-
-            //     // calculate user part
-
-            //     $p = (int)$type_visite->price;
-
-            //     $visitePrice = $p / $type_visite->nb_visite;
-
-            //     $dem_part = ($visitePrice/100) * $type->pourcentage_demarcheur;
-
-
-
-            //     // update user data and save
-
-            //     $demarcheur->balance = floatval($demarcheur->balance) + $dem_part;
-
-            //     $demarcheur->save();
-
-            // }
-
-
+            $pass = $passService->house_visited($pass->id, $place);
 
         }
 
 
 
-        return response()->json($data);
+        return response()->json($pass);
 
 
 
@@ -393,14 +364,22 @@ class PassApiController extends Controller
     public function verifPassVisite(Request $request)
 
     {
+        $input = $request->all();
+        $val = Validator::make($input, [
+            'code' => ['required', 'string', 'max:10'],
+        ]);
 
-        $code = $request->code;
+        if($val->fails()){
+            return response()->json(["errors" => $val->messages()], 401);
+        }else{
+            $code = $request->code;
 
-        $data = Pass::with('passType','transaction')
+            $data = Pass::with('pass_type','transaction')
 
-            ->where('code',$code)->first();
-
-        return response()->json($data);
+                ->where('code',$code)->firstOrFail();
+            
+            return response()->json($data);
+        }
 
     }
 
@@ -414,13 +393,13 @@ class PassApiController extends Controller
 
         $pass = Pass::where('code',$code)->first();
 
-        //$data = VisiteEffectue::where('pass_visite_id',$pass->id)->get();
+        // $data = VisitesDone::where('pass_id',$pass->id)->get();
 
 
 
         if ($pass) {
 
-            //$visiteEffectue = $pass->visiteEffectue()->with('places')->get();
+            // $visiteEffectue = $pass->visiteEffectue()->with('places')->get();
 
             $visiteEffectue = $pass->places()->get();
 
@@ -429,8 +408,8 @@ class PassApiController extends Controller
         }else {
 
 
+            return response()->json(["errors" => 'Erreur innatendue'], 401);
 
-            return response()->json('Erreur innatendue');
 
         }
 
@@ -442,14 +421,5 @@ class PassApiController extends Controller
 
 
 
-    public function showPassVisite($id)
-
-    {
-
-        $data = Pass::with('passType','transaction')->findOrFail($id);
-
-        return response()->json($data);
-
-    }
 
 }
