@@ -184,7 +184,7 @@ class AuthApiController extends Controller
         $abonnementServices = new AbonnementServices();
         $f = FascadeImmo::forceCreate([
             'user_id' => $user->id,
-            'name' => $user->name,
+            'name' => 'Immo'.$user->name,
             'email' => $user->email,
             'phone' => $user->phone,
             'description' =>  'Calalogue de propriétées de' . $user->name ,

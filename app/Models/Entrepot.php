@@ -49,23 +49,4 @@ class Entrepot extends Model
         return $this->morphTo();
     }
     
-    public function papers(): MorphOne
-    {
-        return $this->morphOne(LegalPaper::class, 'paperable');
-    }
-    
-    public function interior(): MorphOne
-    {
-        return $this->morphOne(Interior::class, 'interiors');
-    }
-    
-    public function exterior(): MorphOne
-    {
-        return $this->morphOne(Exterior::class, 'exteriorsable');
-    }
-    
-    public function comodities(): MorphOne
-    {
-        return $this->morphOne(Comodities::class, 'comoditiesable');
-    }
 }

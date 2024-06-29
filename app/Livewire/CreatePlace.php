@@ -91,43 +91,6 @@ class CreatePlace extends Component
         $this->is_image_selected = false ;
     }
 
-    public function savePictures(Place $place){
-
-        foreach ($this->photos as $key=>$photo) {
-            if($photo != ''){
-                $photo1 =  TemporaryUploadedFile::createFromBase($photo) ;
-                $imageName = Auth::id().'img'.time().'.'.$photo1->extension();
-                $uploadedPath =$photo1->storeAs('house/photos', $imageName, 's3');
-                $img = ImmoImages::create([
-                    'url' => $uploadedPath,
-                    'place_id' => $place->id,
-                ]);
-                if($key = 0){
-                    $place->photo_couverture = $uploadedPath;
-                    $place->save();
-                }
-
-            }
-        }
-        
-    }
-
-    public function saveVideos(Place $place){
-
-        foreach ($this->videos as $key=>$video) {
-            if($video != ''){
-                $video1 =  TemporaryUploadedFile::createFromBase($video) ;
-                $videoName = Auth::id().'img'.time().'.'.$video1->extension();
-                $uploadedPath = $video1->storeAs('house/videos', $videoName, 's3');
-                $vid = ImmoVideo::create([
-                    'url' => $uploadedPath,
-                    'place_id' => $place->id,
-                ]);
-
-            }
-        }
-        
-    }
 
     public function save(PlaceService $placeServices){
 
@@ -143,8 +106,8 @@ class CreatePlace extends Component
             is_free_view: false
         );
 
-        $this->savePictures($place);
-        $this->saveVideos($place);
+        $placeServices->savePictures($place, $this->photos);
+        $placeServices->saveVideos($place, $this->videos);
         
 
         return redirect()->route('catalogue.places.index');

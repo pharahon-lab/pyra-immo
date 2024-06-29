@@ -18,7 +18,8 @@ class CommunesResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'city_id' => $this->city->id,
-            'city' => $this->city->name,
+            'city' => $this->city,
+            'country' => $this->city->country
         ];
     }
 }

@@ -48,7 +48,7 @@ Route::group(
     function(){
         Route::group(['prefix' => 'places',], function(){
             Route::get('/', [PlaceApiController::class, 'getMyPlaces']);
-            Route::get('create', [PlaceApiController::class, 'create']);
+            Route::post('create', [PlaceApiController::class, 'addPlace']);
             Route::get('edit/{house_id}', [PlaceApiController::class, 'edit']);
             Route::get('show/{house_id}', [PlaceApiController::class, 'show']);
             Route::get('delete/{house_id}', [PlaceApiController::class, 'delete']);
@@ -107,5 +107,6 @@ Route::group(
     function(){
         
         Route::get('/', [PlaceApiController::class, 'getAllplaces']);
+        Route::get('category/{category}', [PlaceApiController::class, 'getCategoryPlaces']);
         
     });

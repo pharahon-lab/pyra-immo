@@ -41,11 +41,14 @@ return new class extends Migration
             $table->boolean('is_occupe')->nullable()->default(false);
             $table->boolean('is_rejected')->nullable()->default(false);
 
+            $table->boolean('has_parent')->nullable()->default(false);
+            $table->foreignUuid('parent_id')->constrained('places')->onDelete('cascade')->nullable();
+
             $table->unsignedBigInteger('commune_id')->nullable();
             $table->foreign('commune_id')->references('id')
                 ->on('communes');
 
-            $table->foreignUuid('facade_id')->constrained('fascade_immos')->onDelete('cascade');
+            $table->foreignUuid('fascade_id')->constrained('fascade_immos')->onDelete('cascade');
             
 
             $table->uuidMorphs('placeable');

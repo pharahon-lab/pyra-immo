@@ -6,10 +6,13 @@ use App\Enum\PlaceOfferTypeEnum;
 use App\Enum\PlaceRentPeriodEnum;
 use App\Enum\PlaceTypeEnum;
 use App\Http\Resources\CommunesResource;
+use App\Http\Resources\PlaceResource;
 use App\Models\Communes;
 use App\Models\Country;
 use App\Models\Place;
+use App\Services\PlaceService;
 use Illuminate\Http\Request;
+use IntlIterator;
 
 class PlaceApiController extends Controller
 {
@@ -22,9 +25,22 @@ class PlaceApiController extends Controller
     
     public function getAllEnums()
     {
-        $data['offer_types'] = PlaceOfferTypeEnum::cases();
-        $data['rent_types' ]= PlaceRentPeriodEnum::cases();
-        $data['place_types'] = PlaceTypeEnum::cases();
+        $pote = [];
+        $prpe = [];
+        $pte = [];
+        
+        foreach (PlaceOfferTypeEnum::cases() as $key => $en) {
+            $pote[$en->name] = $en->value;
+        }
+        foreach (PlaceRentPeriodEnum::cases() as $key => $en) {
+            $prpe[$en->name] = $en->value;
+        }
+        foreach (PlaceTypeEnum::cases() as $key => $en) {
+            $pte[$en->name] = $en->value;
+        }
+        $data['offer_types'] = $pote;
+        $data['rent_types' ]= $prpe;
+        $data['place_types'] = $pte;
         return response()->json($data);
     }
     
@@ -32,12 +48,6 @@ class PlaceApiController extends Controller
     {
         $contries = Country::all();
         return response()->json($contries);
-    }
-
-    public function getAllplaces()
-    {
-        $places = Place::all();
-        return response()->json($places);
     }
     
 
@@ -72,90 +82,44 @@ class PlaceApiController extends Controller
         return response()->json($datas);
     }
 
-    public function addPlace(Request $request)
+    public function addPlace(Request $request, PlaceService $placeServices)
     {
-        //on compte le nb d'enregistrement existant
-        $count = Place::count('id');
-        $data = Place::create(
-            [
-                'latitude'=>$request->latitude,
-                'longitude'=>$request->longitude,
-                'price'=>$request->price,
-                'proprio_name'=>$request->proprio_name,
-                'proprio_telephone'=>$request->proprio_telephone,
-                'user_id'=>$request->user_id,
-                'description'=>$request->description,
-                'created_at'=>now(),
-                'is_Studio'=>$request->is_Studio,
-                'is_Chambre'=>$request->is_Chambre,
-                'is_occupe'=>$request->is_occupe,
-                'is_Residence'=>$request->is_Residence,
-                'is_Appartment'=>$request->is_Appartment,
-                'is_Bureau'=>$request->is_Bureau,
-                'is_MAISON_BASSE'=>$request->is_MAISON_BASSE,
-                'is_DUPLEX'=>$request->is_DUPLEX,
-                'has_PISCINE'=>$request->has_PISCINE,
-                'is_HAUT_STANDING'=>$request->is_HAUT_STANDING,
-                'has_COUR_AVANT'=>$request->has_COUR_AVANT,
-                'has_COUR_ARRIERE'=>$request->has_COUR_ARRIERE,
-                'has_GARDIEN'=>$request->has_GARDIEN,
-                'has_GARAGE'=>$request->has_GARAGE,
-                'has_balcon_avant'=>$request->has_balcon_avant,
-                'has_balcon_arriere'=>$request->has_balcon_arriere,
-                'nombre_piece'=>$request->nombre_piece,
-                'nombre_salle_eau'=>$request->nombre_salle_eau,
-                'is_validated'=>$request->is_validated,
-                'commune_id'=>$request->commune_id,
-                'image_id'=>$count+1,
-                'ref'=>uniqid()
+        
+        // $request_images = $request->images;
+        // $request_videos = $request->videos;
+        // $im = [];
+        // $vi = [];
+        $request_place= $request->place;
+        $request_interieur = $request->interieur;
+        $request_exterieur = $request->exterieur;
+        $request_commoditees = $request->commoditees;
 
-            ]
+        $place = $placeServices->new_api_place( 
+            user: $request->user(),
+            placeForm: $request_place,
+            interiorForm: $request_interieur,
+            exteriorForm: $request_exterieur,
+            comoditiesForm: $request_commoditees,
+            place_type: $request_place['place_type'],
+            master_house_id: $request_place['parent_id'],
+            master_house_type: null,
+            has_master_house: $request_place['has_parent'],
+            is_free_view: false
         );
-        //on enregistre dans la table image la photo
-        //traitement image
-        /*$arrImg = [];
-        $array_image = [];
-        for ($i=0; $i<=9; $i++)
-        {
-            $image=$request->picture;
-            $image.$i = $request->picture.$i;
-        // $arrImg = [];
-        // $array_image = [];
-        // for ($i=0; $i<=9; $i++)
-        // {
-        //     $image=$request->picture;
-        //     $image.$i = $request->picture.$i;
 
-        //     if($image.$i!=null)
-        //     {
-        //         $imageName=$image.$i;
-        //         $image.$i = $this->savePicture($imageName, ('assets/img/places/'.rand(1,9999999999999999).'.jpg'));
-        //     }
-        //     else
-        //     {
-        //         $imageName=null;
-        //         $image.$i=null;
-        //     }
-
-        //     $array_image = array_push($arrImg,$image.$i);
+        // foreach ($request_images as $pictu) {
+        //     array_push($im, base64_decode($pictu));
         // }
 
-        Image::create(
-            [
-                'place_id'=>$data->image_id,
-                'url'=>$array_image,
-                'created_at'=>now(),
-            ]
-        );*/
-        // Image::create(
-        //     [
-        //         'place_id'=>$data->image_id,
-        //         'url'=>$array_image,
-        //         'created_at'=>now(),
-        //     ]
-        // );
+        // foreach ($request_videos as $vide) {
+        //     array_push($vi, base64_decode($vide));
+        // }
 
-        return response()->json($data);
+        // $placeServices->savePictures($place, $im);
+        // $placeServices->saveVideos($place, $vi);
+        // $place->refresh();
+
+        return PlaceResource::make($place);
     }
 
     public function showPlace($id)
@@ -215,7 +179,30 @@ class PlaceApiController extends Controller
     public function getMyPlaces(Request $request)
     {
         $user = $request->user();
-        return response()->json($user->fascadeImmo->places);
-        }
+        return response()->json(PlaceResource::collection($user->fascadeImmo->places));
+    }
 
+    public function getAllplaces()
+    {
+        $places = Place::all();
+        return response()->json($places);
+    }
+
+    public function getCategoryPlaces($category)
+    {
+        $pt = PlaceTypeEnum::cases();
+        
+        $keys = array_map(fn($case) => $case->name, $pt); 
+        if (in_array($category, $keys)) {
+            $plt = array_filter($pt, function ($case) use ($category) {
+                return $case->name === $category;
+            });
+            $places = Place::where('placeable_type', $plt[array_key_first($plt)])->limit(5)->get();
+            return response()->json(PlaceResource::collection($places));
+        }else{
+            return response()->json(["errors" => ['Category' => 'Category inconnue ']], 401);
+        }
+        // $places = Place::where('placeable_type', PlaceTypeEnum::APPARTEMENT->value)->get();
+        // return response()->json(PlaceResource::collection($places));
+    }
 }

@@ -26,6 +26,8 @@ return new class extends Migration
             $table->integer('views')->default(0);
             $table->boolean('is_company')->default(false);
             
+            $table->foreignId('country_id')->nullable();
+            
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
 
             $table->timestamps();

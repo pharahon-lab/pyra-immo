@@ -35,7 +35,7 @@
                             @endforeach
                         </select>
                         <div class="relative w-full">
-                            <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
+                            <x-input id="phone" class="block mt-1 w-full text-black" type="text" name="phone" :value="old('phone')" required autofocus autocomplete="phone" />
 
                         </div>
                     </div>
@@ -44,7 +44,7 @@
 
                 <div class="mt-8">
                     <x-label for="password" value="{{ __('Password') }}" />
-                    <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                    <x-input id="password" class="block mt-1 w-full text-black" type="password" name="password" required autocomplete="current-password" />
                 </div>
 
                 <div class="block mt-8">
